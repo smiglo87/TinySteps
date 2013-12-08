@@ -8,13 +8,14 @@ using System.Collections;
 public class UIViewController : MonoBehaviour {
 
 
-	public UIView viewDashboard;
+	public ViewDashboard viewDashboard;
 	public UIView viewWelcome;
 
 
 
-	//KOCHAM CIE!
-
-
+	void Start()
+	{
+		viewDashboard.Show();
+	}
 
 }

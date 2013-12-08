@@ -531,7 +531,7 @@ public class UserManager : MonoBehaviour {
 		if (babies[babyIndex].profilePicture != "") StartCoroutine(photoManager.GetTexture(babies[babyIndex].profilePicture, value => guiManager.dashboardBabyProfilePicture.mainTexture = value));
 		else guiManager.dashboardBabyProfilePicture.mainTexture = guiManager.babyRegisterNoAvatarPicture;
 
-		guiManager.dashboardBabyname.text = babies[babyIndex].babyName;
+		//guiManager.dashboardBabyname.text = babies[babyIndex].babyName;
 		guiManager.dashboardBabyAge.text = babies[babyIndex].GetAge();
 	
 		string[] words = babies[babyIndex].GetAge().Split(',');

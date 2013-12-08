@@ -13,7 +13,7 @@ public class UIView : MonoBehaviour {
 	/// <summary>
 	/// Showing view by calling other function with alpha.
 	/// </summary>
-	public void Show()
+	public virtual void Show()
 	{
 		UpdatePanelVisibility(true);
 	}

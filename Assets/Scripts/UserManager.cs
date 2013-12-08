@@ -6,7 +6,13 @@ using System;
 using System.Text.RegularExpressions;
 
 public class UserManager : MonoBehaviour {
-	
+
+	//constructs static event
+	public delegate void OnBabyChangedHandler();
+	public static event OnBabyChangedHandler OnBabyChanged;
+
+
+
 	public GUIManager guiManager;
 	public ViewManager viewManager;
 	public PhotoManager photoManager;
@@ -528,39 +534,10 @@ public class UserManager : MonoBehaviour {
 	//Showing specific baby from the babiesList in Dashboard
 	public void ShowBaby(int babyIndex)
 	{
-		if (babies[babyIndex].profilePicture != "") StartCoroutine(photoManager.GetTexture(babies[babyIndex].profilePicture, value => guiManager.dashboardBabyProfilePicture.mainTexture = value));
-		else guiManager.dashboardBabyProfilePicture.mainTexture = guiManager.babyRegisterNoAvatarPicture;
-
-		//guiManager.dashboardBabyname.text = babies[babyIndex].babyName;
-		guiManager.dashboardBabyAge.text = babies[babyIndex].GetAge();
-	
-		string[] words = babies[babyIndex].GetAge().Split(',');
-		
-		//format baby age
-		if(words[0].ToString() == "1")
-		{
-			if(words[1].ToString() == "1")
-			{
-				guiManager.dashboardBabyAge.text = "is " + words[0].ToString() + " year and " + words[1].ToString() + " month old today";
-			}
-			else
-			{
-				guiManager.dashboardBabyAge.text = "is " + words[0].ToString() + " year and " + words[1].ToString() + " months old today";
-			}
-		}
-		else
-		{
-			if(words[1].ToString () == "1")
-			{
-				guiManager.dashboardBabyAge.text = "is " + words[0].ToString() + " years and " + words[1].ToString() + " month old today";
-			}
-			else
-			{
-				guiManager.dashboardBabyAge.text = "is " + words[0].ToString() + " years and " + words[1].ToString() + " months old today";
-			}
-		}
-		
 		currentBaby = babyIndex;
+
+		//calls event - the baby has changed
+		if(OnBabyChanged != null) OnBabyChanged();
 
 		guiManager.MealListRefresh();
 		guiManager.NappyListRefresh();

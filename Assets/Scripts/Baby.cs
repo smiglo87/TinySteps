@@ -31,7 +31,10 @@ public class Baby : MonoBehaviour {
 	public List<Length> lengths = new List<Length>();
 
 	
-	//Getting the age of the baby
+	/// <summary>
+	/// Gets the age and returns string in "years,months" format.
+	/// </summary>
+	/// <returns>The age.</returns>
 	public string GetAge()
 	{
 

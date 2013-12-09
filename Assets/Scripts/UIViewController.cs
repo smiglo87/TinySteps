@@ -9,7 +9,7 @@ public class UIViewController : MonoBehaviour {
 
 
 	public ViewDashboard viewDashboard;
-	public UIView viewWelcome;
+	public ViewWelcome viewWelcome;
 
 
 

@@ -82,58 +82,24 @@ public class UserManager : MonoBehaviour {
 
 	
 	//Adding new baby to babies list
-	public void AddBaby()
+	public void AddBaby(string bPicture, string bName, Baby.Gender bGender, DateTime bDob, Baby.Unit bWeightUnit, int bWeightUnits, int bWeightDecimals, Baby.Unit bLengthUnit, float bLengthUnits, float bLengthDecimals)
 	{
 
 		Baby baby = new Baby();
 		
-		baby.profilePicture = registerBabyProfilePicturePath;
-		baby.babyName = guiManager.babyRegisterNameInput.value;
+		baby.profilePicture = bPicture;
+		baby.babyName = bName;
+		baby.gender = bGender;
+		baby.dateOfBirth = new DateTime(bDob.Year, bDob.Month, bDob.Day);
 		
+		baby.weightUnit = bWeightUnit;
+		baby.bornWeightUnits = bWeightUnits;
+		baby.bornWeightDecimals = bWeightDecimals;
 		
-		if(guiManager.babyRegisterGenderMale.value)
-		{
-			baby.gender = Baby.Gender.male;
-		}
-		else
-		{
-			baby.gender = Baby.Gender.female;
-		}
-		
-		baby.dateOfBirth = new DateTime(int.Parse(guiManager.babyRegisterDobYear.value), int.Parse(guiManager.babyRegisterDobMonth.value), int.Parse(guiManager.babyRegisterDobDay.value));
-		
-		if(guiManager.babyRegisterBirthWeightUnits.value.Length > 0)
-		{
-			if(userUnit == Unit.metric)
-			{
-				baby.weightUnit = Baby.Unit.metric;
-			}
-			else
-			{
-				baby.weightUnit = Baby.Unit.imperial;
-			}
-			
-			baby.bornWeightUnits = int.Parse(guiManager.babyRegisterBirthWeightUnits.value);
-			baby.bornWeightDecimals = int.Parse (guiManager.babyRegisterBirthWeightDecimals.value);
-		}
-		
-		
-		if(guiManager.babyRegisterBirthLengthUnits.value.Length > 0)
-		{
-			if(userUnit == Unit.metric)
-			{
-				baby.lengthUnit = Baby.Unit.metric;
-			}
-			else
-			{
-				baby.lengthUnit = Baby.Unit.imperial;
-				baby.bornLengthDecimals = int.Parse(guiManager.babyRegisterBirthLengthDecimals.value);
-			}
-			
-			baby.bornLengthUnits = int.Parse(guiManager.babyRegisterBirthLengthUnits.value);
-			
-		}
-		
+		baby.lengthUnit = bLengthUnit;
+		baby.bornLengthUnits = bLengthUnits;
+		baby.bornLengthDecimals = bLengthDecimals;
+	
 		babies.Add(baby);
 		SaveBabies();
 		ShowBaby(babies.Count-1);
@@ -683,13 +649,6 @@ public class UserManager : MonoBehaviour {
 		guiManager.SleepingListRefresh();
 		viewManager.ToTrackerSleepingListView();
 	}
-
-
-	public void AddEndOfSleeping()
-	{
-
-	}
-
 
 
 	public void AddWeight()

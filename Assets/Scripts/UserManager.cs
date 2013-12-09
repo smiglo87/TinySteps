@@ -10,12 +10,12 @@ public class UserManager : MonoBehaviour {
 	//constructs static event
 	public delegate void OnBabyChangedHandler();
 	public static event OnBabyChangedHandler OnBabyChanged;
-
-
-
+	
 	public GUIManager guiManager;
 	public ViewManager viewManager;
 	public PhotoManager photoManager;
+	public UIViewController viewController;
+
 	public BottleController bottleController;
 	public BreastfeedController breastfeedController;
 	public CupController cupController;
@@ -48,11 +48,11 @@ public class UserManager : MonoBehaviour {
 		if(babies.Count > 0)
 		{
 			ShowBaby(0);
-			viewManager.ToDashboardMainView();
+			viewController.ToDashboardMainView();
 		}
 		else
 		{
-			viewManager.ToWelcomeView();
+			viewController.ToWelcomeView();
 		}
 		
 	}
@@ -75,7 +75,7 @@ public class UserManager : MonoBehaviour {
 		else Debug.LogError("Initial user units unrecognised", guiManager.initialUnitList);
 		
 
-		viewManager.ToBabyRegistrationView();
+		viewController.ToBabyRegistrationView();
 		
 	}
 	
@@ -84,7 +84,6 @@ public class UserManager : MonoBehaviour {
 	//Adding new baby to babies list
 	public void AddBaby(string bPicture, string bName, Baby.Gender bGender, DateTime bDob, Baby.Unit bWeightUnit, int bWeightUnits, int bWeightDecimals, Baby.Unit bLengthUnit, float bLengthUnits, float bLengthDecimals)
 	{
-
 		Baby baby = new Baby();
 		
 		baby.profilePicture = bPicture;
@@ -103,9 +102,8 @@ public class UserManager : MonoBehaviour {
 		babies.Add(baby);
 		SaveBabies();
 		ShowBaby(babies.Count-1);
-		
-		
-	    viewManager.ToDashboardMainView();
+
+	    viewController.ToDashboardMainView();
 	}
 	
 	
@@ -516,44 +514,23 @@ public class UserManager : MonoBehaviour {
 	
 	public void OnSwipe(SwipeGesture gesture)
 	{
-		if(viewManager.currentView == viewManager.dashboardMainView)
+		if(viewController.currentView == viewController.viewDashboard)
 		{
-			if(gesture.Direction == FingerGestures.SwipeDirection.Left)
-			{
-				NextBaby();
-			}
-			else if(gesture.Direction == FingerGestures.SwipeDirection.Right)
-			{
-				PreviousBaby();
-			}
+			if(gesture.Direction == FingerGestures.SwipeDirection.Left) NextBaby();
+			else if(gesture.Direction == FingerGestures.SwipeDirection.Right) PreviousBaby();
 		}
 	}
-	
-	
-	
+
 	public void NextBaby()
 	{
-		if(currentBaby == babies.Count-1)
-		{
-			ShowBaby(0);
-		}
-		else
-		{
-			ShowBaby(currentBaby+1);
-		}
+		if(currentBaby == babies.Count-1) ShowBaby(0);
+		else ShowBaby(currentBaby+1);
 	}
 	
 	public void PreviousBaby()
 	{
-		
-		if(currentBaby > 0)
-		{
-			ShowBaby(currentBaby-1);
-		}
-		else
-		{
-			ShowBaby(babies.Count-1);
-		}
+		if(currentBaby > 0) ShowBaby(currentBaby-1);
+		else ShowBaby(babies.Count-1);
 	}
 	
 

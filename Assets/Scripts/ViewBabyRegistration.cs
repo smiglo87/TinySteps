@@ -4,19 +4,18 @@ using System;
 
 public class ViewBabyRegistration : UIView {
 
-	public GUIManager guiManager;
-	public ViewManager viewManager;
+	public PopUpManager popUpManager;
+	public UIViewController viewController;
+	public ViewBabyRegistration2 viewBR2;
+	public UserManager userManager;
 
 	public UITexture profilePicture;
 	public Texture2D noAvatarPicture;
 	public UIInput nameInput;
-	public UIToggle genderMale;
+	public UIToggle gender;
 	public UIInput dobDay;
 	public UIInput dobMonth;
 	public UIInput dobYear;
-
-	public UIButton back;
-	public UIButton next;
 
 	public override void Show()
 	{
@@ -26,31 +25,43 @@ public class ViewBabyRegistration : UIView {
 	}
 
 
-	public void MoveToRegistrationView2()
+	public void VerifyForm()
 	{
-		if(next.isEnabled == true) 
+		if (CheckBabyRegistrationForm() == true)
 		{
-			CheckBabyRegistrationForm();
+			viewController.ToBabyRegistrationView2();
 		}
 	}
 
 
-
-	public void CheckBabyRegistrationForm()
+	public bool CheckBabyRegistrationForm()
 	{
 		if(nameInput.value.Length > 0)
 		{
 			if(Baby.IsDateTime(dobYear.value + "." + dobMonth.value + "." + dobDay.value))
 			{
-				if(DateTime.Today.CompareTo(new DateTime(int.Parse(dobYear.value), int.Parse(dobMonth.value), int.Parse(dobDay.value))) >= 0)
+				if(DateTime.Today.CompareTo(new DateTime(int.Parse(dobYear.value), int.Parse(dobMonth.value), int.Parse(dobDay.value))) >= 0) 
 				{
-					viewManager.ToBabyRegistrationView2();
+					//success]
+					return true;
 				}
-				else guiManager.ShowError ("Error", "Ooops! Your baby isn't out yet! Please enter valid date of birth");
+				else
+				{
+					popUpManager.ShowError ("Error", "Ooops! Your baby isn't out yet! Please enter valid date of birth");
+					return false;
+				}
 			}
-			else guiManager.ShowError("Error", "Please enter valid date of birth");
+			else
+			{
+				popUpManager.ShowError("Error", "Please enter valid date of birth");
+				return false;
+			}
 		}
-		else guiManager.ShowError("Error", "Please enter baby's name");
+		else 
+		{
+			popUpManager.ShowError("Error", "Please enter baby's name");
+			return false;
+		}
 	}
 
 
@@ -59,10 +70,24 @@ public class ViewBabyRegistration : UIView {
 	{
 		profilePicture.mainTexture = noAvatarPicture;
 		nameInput.label.text = "Baby Name";
-		genderMale.value = true;
+		gender.value = true;
 		dobDay.label.text = "Day";
 		dobMonth.label.text = "Month";
 		dobYear.label.text = "Year";
+
+		if(userManager.userUnit == UserManager.Unit.metric)
+		{
+			viewBR2.birthWeightUnits.label.text = "kg";
+			viewBR2.birthWeightDecimals.label.text = "g";
+			viewBR2.birthLengthUnits.label.text = "cm";
+		}
+		else
+		{
+			viewBR2.birthWeightUnits.label.text = "lb";
+			viewBR2.birthWeightDecimals.label.text = "oz";
+			viewBR2.birthLengthUnits.label.text = "ft";
+			viewBR2.birthLengthDecimals.label.text = "inch";
+		}
 	}
 
 

@@ -7,11 +7,7 @@ public class ViewManager : MonoBehaviour {
 	
 	public Transform guiCamera;
 	public Transform currentView;
-	
-	public Transform welcomeView;
-	public Transform babyRegistrationView;
-	public Transform babyRegistrationView2;
-	public Transform dashboardMainView;
+
 	
 	public Transform journalView;
 	public Transform journalAddEventView;
@@ -34,11 +30,7 @@ public class ViewManager : MonoBehaviour {
 	
 	public Transform moreView;
 	
-	void Start()
-	{
-		
-	}
-	
+
 	
 	
 	public void ChangeView(Transform targetTransform)
@@ -47,26 +39,7 @@ public class ViewManager : MonoBehaviour {
 		currentView = targetTransform;
 	}
 	
-	public void ToWelcomeView()
-	{
-		ChangeView(welcomeView);
-	}
-	
-	public void ToBabyRegistrationView()
-	{
-		//guiManager.ClearBabyRegistrationForm();
-		ChangeView(babyRegistrationView);
-	}
-	
-	public void ToBabyRegistrationView2()
-	{
-		ChangeView(babyRegistrationView2);
-	}
-	
-	public void ToDashboardMainView()
-	{
-		ChangeView(dashboardMainView);
-	}
+
 	
 	
 	public void ToJournalView()

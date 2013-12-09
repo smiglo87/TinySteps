@@ -3,10 +3,11 @@ using System.Collections;
 using Prime31;
 
 public class PhotoManager : MonoBehaviour {
-	
+
 	public UserManager userManager;
-	public ViewManager viewManager;
-	public GUIManager guiManager;
+	public PopUpManager popUpManager;
+	public UIViewController viewController;
+	public ViewBabyRegistration viewBabyRegistration;
 	
 	
 	public void PromptForPhoto()
@@ -42,20 +43,20 @@ public class PhotoManager : MonoBehaviour {
 	IEnumerator _PhotoTaken(string imagePath)
 	{
 		Debug.Log("image picker chose image: " + imagePath);
-		if(viewManager.currentView == viewManager.babyRegistrationView)
+		if(viewController.currentView == viewController.viewBabyRegistration)
 		{
 			Texture2D takenImage = new Texture2D(1,1);
 			yield return StartCoroutine(GetTexture(imagePath, value => takenImage = value));
 			
 			if(takenImage.width > 1)
 			{
-				guiManager.babyRegisterProfilePicture.mainTexture = takenImage;
-				guiManager.babyRegisterProfilePicture.MarkAsChanged();
+				viewBabyRegistration.profilePicture.mainTexture = takenImage;
+				viewBabyRegistration.profilePicture.MarkAsChanged();
 				userManager.registerBabyProfilePicturePath = imagePath;
 			}
 			else
 			{
-				guiManager.ShowError("Failed", "There was a problem with loading your picture. Please try again.");
+				popUpManager.ShowError("Failed", "There was a problem with loading your picture. Please try again.");
 			}
 		}
 		

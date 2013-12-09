@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ViewWelcome : MonoBehaviour {
+public class ViewWelcome : UIView {
 
 
 }

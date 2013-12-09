@@ -7,16 +7,44 @@ using System.Collections;
 /// </summary>
 public class UIViewController : MonoBehaviour {
 
+	public Transform guiCamera;
+	public UIView currentView;
 
-	public ViewDashboard viewDashboard;
 	public ViewWelcome viewWelcome;
 	public ViewBabyRegistration viewBabyRegistration;
+	public ViewBabyRegistration2 viewBabyRegistration2;
+	public ViewDashboard viewDashboard;
 
 
-
-	void Start()
+	public void ChangeView(UIView target)
 	{
-		viewDashboard.Show();
+		if(currentView != null) currentView.Hide();
+		guiCamera.localPosition = target.transform.localPosition;
+		currentView = target;
+		currentView.Show();
 	}
+
+
+	public void ToWelcomeView()
+	{
+		ChangeView(viewWelcome);
+	}
+	
+	public void ToBabyRegistrationView()
+	{
+
+		ChangeView(viewBabyRegistration);
+	}
+	
+	public void ToBabyRegistrationView2()
+	{
+		ChangeView(viewBabyRegistration2);
+	}
+	
+	public void ToDashboardMainView()
+	{
+		ChangeView(viewDashboard);
+	}
+
 
 }

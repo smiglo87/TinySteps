@@ -10,27 +10,12 @@ public class GUIManager : MonoBehaviour {
 
 	//Welcome
 	public UIPopupList initialUnitList;
-	
-	//Baby Registration
-	public UITexture babyRegisterProfilePicture;
-	public Texture2D babyRegisterNoAvatarPicture;
-	public UIInput babyRegisterNameInput;
-	public UIToggle babyRegisterGenderMale;
-	public UIInput babyRegisterDobDay;
-	public UIInput babyRegisterDobMonth;
-	public UIInput babyRegisterDobYear;
-	
+
 	public UIInput babyRegisterBirthWeightUnits;
 	public UIInput babyRegisterBirthWeightDecimals;
 	
 	public UIInput babyRegisterBirthLengthUnits;
 	public UIInput babyRegisterBirthLengthDecimals;
-	
-	//Dashboard
-	public UILabel dashboardBabyname;
-	public UILabel dashboardBabyAge;
-	public UITexture dashboardBabyProfilePicture;
-	
 
 	//LoadTrackerLabels
 	public UILabel lastMealTime;
@@ -229,15 +214,6 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-
-
-
-	
-	public void ShowError(string title, string message)
-	{
-		EtceteraBinding.showAlertWithTitleMessageAndButtons(title, message, new string[] {"OK"} );		
-		Debug.Log (message);
-	}
 
 	public void UpdateTimeInputs()
 	{

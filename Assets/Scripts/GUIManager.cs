@@ -7,9 +7,7 @@ public class GUIManager : MonoBehaviour {
 	
 	public ViewManager viewManager;
 	public UserManager userManager;
-	
-	
-	
+
 	//Welcome
 	public UIPopupList initialUnitList;
 	
@@ -113,42 +111,6 @@ public class GUIManager : MonoBehaviour {
 	public UIInput lengthDecimals;
 
 	public UIList lengthsList;
-
-
-	void Start()
-	{
-
-	}
-	
-	
-		
-		
-	public void CheckBabyRegistrationForm1()
-	{
-		if(babyRegisterNameInput.value.Length > 0)
-		{
-			if(Baby.IsDateTime(babyRegisterDobYear.value + "." + babyRegisterDobMonth.value + "." + babyRegisterDobDay.value))
-			{
-				if(DateTime.Today.CompareTo(new DateTime(int.Parse(babyRegisterDobYear.value), int.Parse(babyRegisterDobMonth.value), int.Parse(babyRegisterDobDay.value))) >= 0)
-				{
-					viewManager.ToBabyRegistrationView2();
-				}
-				else
-				{
-					ShowError ("Error", "Ooops! Your baby isn't out yet! Please enter valid date of birth");
-				}
-			}
-			else
-			{
-				ShowError("Error", "Please enter valid date of birth");
-			}
-		}
-		else
-		{
-			ShowError("Error", "Please enter baby's name");
-		}
-		
-	}
 
 
 	//fills labels in register form if only one unit is filled (only kg or g)
@@ -276,26 +238,7 @@ public class GUIManager : MonoBehaviour {
 		EtceteraBinding.showAlertWithTitleMessageAndButtons(title, message, new string[] {"OK"} );		
 		Debug.Log (message);
 	}
-	
-	//Clear registration form
-	public void ClearBabyRegistrationForm()
-	{
-		babyRegisterProfilePicture.mainTexture = babyRegisterNoAvatarPicture;
-		babyRegisterNameInput.label.text = "Baby Name";
-		babyRegisterGenderMale.value = true;
-		babyRegisterDobDay.label.text = "Day";
-		babyRegisterDobMonth.label.text = "Month";
-		babyRegisterDobYear.label.text = "Year";
-		
-		LabelWeightUnitChange();
-		LabelLengthUnitChange();
-		LengthUnitChanged();
-		
-	}	
 
-
-
-	
 	public void UpdateTimeInputs()
 	{
 		int hourNow = DateTime.Now.Hour;

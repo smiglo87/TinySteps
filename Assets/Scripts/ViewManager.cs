@@ -54,7 +54,7 @@ public class ViewManager : MonoBehaviour {
 	
 	public void ToBabyRegistrationView()
 	{
-		guiManager.ClearBabyRegistrationForm();
+		//guiManager.ClearBabyRegistrationForm();
 		ChangeView(babyRegistrationView);
 	}
 	

@@ -10,6 +10,7 @@ public class UIViewController : MonoBehaviour {
 
 	public ViewDashboard viewDashboard;
 	public ViewWelcome viewWelcome;
+	public ViewBabyRegistration viewBabyRegistration;
 
 
 

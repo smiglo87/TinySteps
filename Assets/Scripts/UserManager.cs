@@ -82,20 +82,30 @@ public class UserManager : MonoBehaviour {
 
 	
 	//Adding new baby to babies list
-	public void AddBaby(string bPicture, string bName, Baby.Gender bGender, DateTime bDob, Baby.Unit bWeightUnit, int bWeightUnits, int bWeightDecimals, Baby.Unit bLengthUnit, float bLengthUnits, float bLengthDecimals)
+	public void AddBaby(string bPicture, string bName, Baby.Gender bGender, DateTime bDob, int bWeightUnits, int bWeightDecimals, float bLengthUnits, float bLengthDecimals)
 	{
 		Baby baby = new Baby();
-		
+
 		baby.profilePicture = bPicture;
 		baby.babyName = bName;
+
 		baby.gender = bGender;
 		baby.dateOfBirth = new DateTime(bDob.Year, bDob.Month, bDob.Day);
-		
-		baby.weightUnit = bWeightUnit;
+
+		if(userUnit == Unit.metric)
+		{
+			baby.weightUnit = Baby.Unit.metric;
+			baby.lengthUnit = Baby.Unit.metric;
+		}
+		else if(userUnit == Unit.imperial)
+		{
+			baby.weightUnit = Baby.Unit.imperial;
+			baby.lengthUnit = Baby.Unit.imperial;
+		}
+
 		baby.bornWeightUnits = bWeightUnits;
 		baby.bornWeightDecimals = bWeightDecimals;
-		
-		baby.lengthUnit = bLengthUnit;
+
 		baby.bornLengthUnits = bLengthUnits;
 		baby.bornLengthDecimals = bLengthDecimals;
 	

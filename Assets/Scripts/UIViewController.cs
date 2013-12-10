@@ -32,7 +32,6 @@ public class UIViewController : MonoBehaviour {
 	
 	public void ToBabyRegistrationView()
 	{
-
 		ChangeView(viewBabyRegistration);
 	}
 	

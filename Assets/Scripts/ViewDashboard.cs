@@ -49,43 +49,31 @@ public class ViewDashboard : UIView {
 
 	public void SetProfilePicture()
 	{
-		
 		if (userManager.babies[userManager.currentBaby].profilePicture != "") StartCoroutine(photoManager.GetTexture(userManager.babies[userManager.currentBaby].profilePicture, value => profilePicture.mainTexture = value));
 		else profilePicture.mainTexture = noAvatarPicture;
 	}
-	
+
+
 	public void SetBabyName()
 	{
 		babyName.text = userManager.babies[userManager.currentBaby].babyName;
 	}
 
+
 	public void SetBabyAge()
 	{
-
 		string[] words = userManager.babies[userManager.currentBaby].GetAge().Split(',');
 		
 		//format baby age
 		if(words[0].ToString() == "1")
 		{
-			if(words[1].ToString() == "1")
-			{
-				babyAge.text = "is " + words[0].ToString() + " year and " + words[1].ToString() + " month old today";
-			}
-			else
-			{
-				babyAge.text = "is " + words[0].ToString() + " year and " + words[1].ToString() + " months old today";
-			}
+			if(words[1].ToString() == "1") babyAge.text = "is " + words[0].ToString() + " year and " + words[1].ToString() + " month old today";
+			else babyAge.text = "is " + words[0].ToString() + " year and " + words[1].ToString() + " months old today";
 		}
 		else
 		{
-			if(words[1].ToString () == "1")
-			{
-				babyAge.text = "is " + words[0].ToString() + " years and " + words[1].ToString() + " month old today";
-			}
-			else
-			{
-				babyAge.text = "is " + words[0].ToString() + " years and " + words[1].ToString() + " months old today";
-			}
+			if(words[1].ToString () == "1") babyAge.text = "is " + words[0].ToString() + " years and " + words[1].ToString() + " month old today";
+			else babyAge.text = "is " + words[0].ToString() + " years and " + words[1].ToString() + " months old today";
 		}
 	}
 

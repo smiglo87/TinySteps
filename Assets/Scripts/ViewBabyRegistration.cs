@@ -25,12 +25,9 @@ public class ViewBabyRegistration : UIView {
 	}
 
 
-	public void VerifyForm()
+	public void VerifyFirstForm()
 	{
-		if (CheckBabyRegistrationForm() == true)
-		{
-			viewController.ToBabyRegistrationView2();
-		}
+		if (CheckBabyRegistrationForm() == true) viewController.ToBabyRegistrationView2();
 	}
 
 
@@ -42,7 +39,7 @@ public class ViewBabyRegistration : UIView {
 			{
 				if(DateTime.Today.CompareTo(new DateTime(int.Parse(dobYear.value), int.Parse(dobMonth.value), int.Parse(dobDay.value))) >= 0) 
 				{
-					//success]
+					//success
 					return true;
 				}
 				else

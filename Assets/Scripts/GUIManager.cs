@@ -24,19 +24,7 @@ public class GUIManager : MonoBehaviour {
 
 
 	//AddFeeding
-	public UIInput feedingHour;
-	public UIInput feedingMin;
-	public UIPopupList foodType;
-	public UILabel mealAmount;
 	public UIList mealsList;
-
-	public GameObject bottle;
-	public IPTextPicker leftBreast;
-	public IPTextPicker rightBreast;
-	public GameObject breastfeeding;
-
-	public GameObject cup;
-
 
 	//AddNappy
 	public UIInput nappyHour;
@@ -145,16 +133,7 @@ public class GUIManager : MonoBehaviour {
 	}
 
 
-	public void UpdateTimeInputs()
-	{
-		int hourNow = DateTime.Now.Hour;
-		int minNow = DateTime.Now.Minute;
-		feedingHour.value = hourNow.ToString();
-		if(minNow < 10) feedingMin.value = "0" + minNow.ToString();
-		else feedingMin.value = minNow.ToString();
 
-		if(hourNow < 10) feedingHour.value = "0" + hourNow.ToString();
-	}
 
 	public void UpdateTimeInputsNappy()
 	{
@@ -357,31 +336,6 @@ public class GUIManager : MonoBehaviour {
 
 	}
 
-
-	public void ChangeMealTypeSprite()
-	{
-		if(foodType.value == "Breastmilk" || foodType.value == "Formula") 
-		{
-			bottle.SetActive(true);
-			breastfeeding.SetActive(false);
-			cup.SetActive(false);
-		}
-		else if(foodType.value == "Breastfeed")
-		{
-			bottle.SetActive(false);
-			breastfeeding.SetActive(true);
-			cup.SetActive(false);
-		}
-		else if(foodType.value == "Solids")
-		{
-			bottle.SetActive(false);
-			breastfeeding.SetActive(false);
-			cup.SetActive(true);
-		}
-
-
-
-	}
 
 
 	public void NappyListRefresh()

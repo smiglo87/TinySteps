@@ -35,7 +35,7 @@ public class ViewDashboard : UIView {
 		UpdateBaby();
 		base.Show();
 	}
-
+	
 
 
 	void UpdateBaby()

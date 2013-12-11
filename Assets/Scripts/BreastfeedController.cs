@@ -4,7 +4,7 @@ using System.Collections;
 public class BreastfeedController : MonoBehaviour {
 
 
-	public GUIManager guiManager;
+	public ViewAddFeeding viewAddFeeding;
 	
 	public int leftAmount;
 	public int rightAmount;
@@ -13,12 +13,12 @@ public class BreastfeedController : MonoBehaviour {
 
 	public void AddBreastfeedAmount()
 	{
-		if(guiManager.leftBreast.CurrentLabelText == "Left Breast") leftAmount = 0;
-		else leftAmount = int.Parse(guiManager.leftBreast.CurrentLabelText);
+		if(viewAddFeeding.leftBreast.CurrentLabelText == "Left Breast") leftAmount = 0;
+		else leftAmount = int.Parse(viewAddFeeding.leftBreast.CurrentLabelText);
 
 
-		if(guiManager.rightBreast.CurrentLabelText == "Right Breast") rightAmount = 0;
-		else rightAmount = int.Parse(guiManager.rightBreast.CurrentLabelText);
+		if(viewAddFeeding.rightBreast.CurrentLabelText == "Right Breast") rightAmount = 0;
+		else rightAmount = int.Parse(viewAddFeeding.rightBreast.CurrentLabelText);
 
 		bothBreastAmounts = leftAmount + rightAmount;
 	}

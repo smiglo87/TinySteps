@@ -69,7 +69,7 @@ public class ViewManager : MonoBehaviour {
 	public void ToTrackerAddFeedingView()
 	{
 		ChangeView(trackerAddFeedingView);
-		guiManager.UpdateTimeInputs();
+		//guiManager.UpdateTimeInputs();
 	}
 	
 	public void ToTrackerFeedingListView()

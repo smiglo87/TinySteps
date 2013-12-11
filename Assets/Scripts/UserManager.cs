@@ -15,6 +15,7 @@ public class UserManager : MonoBehaviour {
 	public ViewWelcome viewWelcome;
 	public ViewManager viewManager;
 	public PhotoManager photoManager;
+	public ViewAddFeeding viewAddFeeding;
 	public UIViewController viewController;
 
 	public BottleController bottleController;
@@ -75,10 +76,6 @@ public class UserManager : MonoBehaviour {
 			userUnit = Unit.imperial;
 		}
 		else Debug.LogError("Initial user units unrecognised", viewWelcome.initialUnitList);
-		
-
-
-		
 	}
 	
 
@@ -547,15 +544,13 @@ public class UserManager : MonoBehaviour {
 	
 
 	
-	public void AddMeal()
+	public void AddMeal(DateTime mTime, string mtype)
 	{
-		
 		Meal meal = new Meal();
 		
-		meal.time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, int.Parse(guiManager.feedingHour.value), int.Parse(guiManager.feedingMin.value), DateTime.Now.Second);
-		
+		meal.time = new DateTime(mTime.Year, mTime.Month, mTime.Day, mTime.Hour, mTime.Minute, mTime.Second);
 
-		if(guiManager.foodType.value == "Breastfeed")
+		if(mtype == "Breastfeed")
 		{
 			meal.mealType = Meal.MealType.breastfeed;
 			meal.unit = Meal.UnitType.min;
@@ -563,7 +558,7 @@ public class UserManager : MonoBehaviour {
 			meal.leftAmount = breastfeedController.leftAmount;
 			meal.rightAmount = breastfeedController.rightAmount;
 		}
-		else if(guiManager.foodType.value == "Breastmilk")
+		else if(mtype == "Breastmilk")
 		{
 			meal.mealType = Meal.MealType.breastMilk;
 			meal.amount = bottleController.currentAmount;
@@ -573,7 +568,7 @@ public class UserManager : MonoBehaviour {
 			}
 			else meal.unit = Meal.UnitType.oz;
 		}
-		else if(guiManager.foodType.value == "Formula")
+		else if(mtype == "Formula")
 		{
 			meal.mealType = Meal.MealType.formula;
 			meal.amount = bottleController.currentAmount;
@@ -583,7 +578,7 @@ public class UserManager : MonoBehaviour {
 			}
 			else meal.unit = Meal.UnitType.oz;
 		}
-		else if (guiManager.foodType.value == "Solids")
+		else if (mtype == "Solids")
 		{
 			meal.mealType = Meal.MealType.solidFood;
 			meal.unit = Meal.UnitType.g; 

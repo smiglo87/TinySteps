@@ -22,7 +22,7 @@ public class UIView : MonoBehaviour {
 	/// <summary>
 	/// Hiding view by calling other function with alpha.
 	/// </summary>
-	public void Hide()
+	public virtual void Hide()
 	{
 		UpdatePanelVisibility(false);
 	}

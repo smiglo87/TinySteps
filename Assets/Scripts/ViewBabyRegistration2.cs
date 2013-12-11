@@ -18,10 +18,11 @@ public class ViewBabyRegistration2 : UIView {
 	public override void Show()
 	{
 		Debug.Log("ViewBabyRegistration2 show called");
+		UpdateLengthInput();
 		base.Show();
 	}
 
-
+	//checks if values in inputs are in correct formats
 	public bool CheckForm()
 	{
 		bool result = false;
@@ -74,7 +75,7 @@ public class ViewBabyRegistration2 : UIView {
 		return result;
 	}
 
-
+	//submits filled form to AddBaby function
 	public void SubmitBaby()
 	{
 		if(CheckForm() == true) 
@@ -87,5 +88,44 @@ public class ViewBabyRegistration2 : UIView {
 			userManager.AddBaby(userManager.registerBabyProfilePicturePath, viewBRegistration.nameInput.value, gender, dob, int.Parse(birthWeightUnits.value), int.Parse(birthWeightDecimals.value), float.Parse(birthLengthUnits.value), float.Parse(birthLengthDecimals.value));
 		}
 	}
+
+
+	//fills inputs in the form if value has not been added by user
+	public void FillInputsIfEmpty()
+	{
+		if(birthWeightUnits.value == "kg" || birthWeightUnits.value == "lb" || birthWeightUnits.value == "" ) birthWeightUnits.value = "0";
+		if(birthWeightDecimals.value == "g" || birthWeightDecimals.value == "oz" || birthWeightDecimals.value == "") birthWeightDecimals.value = "00";
+		if(birthLengthUnits.value == "ft" || birthLengthUnits.value == "" || birthLengthUnits.value == "cm") birthLengthUnits.value = "0";
+		if(birthLengthDecimals.value == "inch" || birthLengthDecimals.value == "") birthLengthDecimals.value = "00";
+	}
+
+
+	//hides length decimals input if userUnit is metric
+	public void UpdateLengthInput()
+	{
+		if(userManager.userUnit == UserManager.Unit.metric) birthLengthDecimals.gameObject.SetActive(false);
+		else birthLengthDecimals.gameObject.SetActive(true);
+		InputLabelsChange();
+	}
+
+	//updates inputs labels according to chosen userUnit 
+	public void InputLabelsChange()
+	{
+		if(userManager.userUnit == UserManager.Unit.metric)
+		{
+			birthWeightUnits.label.text = "kg";
+			birthWeightDecimals.label.text = "g";
+			birthLengthUnits.label.text = "cm";
+		}
+		else
+		{
+			birthWeightUnits.label.text = "lb";
+			birthWeightDecimals.label.text = "oz";
+			birthLengthUnits.label.text = "ft";
+			birthLengthDecimals.label.text = "inch";
+		}
+	}
+	
+	
 
 }

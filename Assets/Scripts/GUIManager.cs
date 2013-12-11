@@ -98,23 +98,7 @@ public class GUIManager : MonoBehaviour {
 	public UIList lengthsList;
 
 
-	//fills labels in register form if only one unit is filled (only kg or g)
-	public void FillRegisterWeight()
-	{
 
-		if(babyRegisterBirthWeightUnits.value == "kg" || babyRegisterBirthWeightUnits.value == "lb" || babyRegisterBirthWeightUnits.value == "" ) babyRegisterBirthWeightUnits.value = "0";
-
-		if(babyRegisterBirthWeightDecimals.value == "g" || babyRegisterBirthWeightDecimals.value == "oz" || babyRegisterBirthWeightDecimals.value == "") babyRegisterBirthWeightDecimals.value = "00";
-	}
-	
-
-	//fills labels in register form if only one unit is filled(only ft or inch)
-	public void FillRegisterLength()
-	{
-		if(babyRegisterBirthLengthUnits.value == "ft" || babyRegisterBirthLengthUnits.value == "") babyRegisterBirthLengthUnits.value = "0";
-
-		if(babyRegisterBirthLengthDecimals.value == "inch" || babyRegisterBirthLengthDecimals.value == "") babyRegisterBirthLengthDecimals.value = "00";
-	}
 
 	public void FillWeight()
 	{

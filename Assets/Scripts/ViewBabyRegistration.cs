@@ -20,7 +20,7 @@ public class ViewBabyRegistration : UIView {
 	public override void Show()
 	{
 		Debug.Log("ViewBabyRegistration show called");
-		ClearRegistrationForm();
+		if(nameInput.value.Length < 1) ClearRegistrationForm();
 		base.Show();
 	}
 
@@ -30,7 +30,7 @@ public class ViewBabyRegistration : UIView {
 		if (CheckBabyRegistrationForm() == true) viewController.ToBabyRegistrationView2();
 	}
 
-
+	//checks if data in the form are in the correct format
 	public bool CheckBabyRegistrationForm()
 	{
 		if(nameInput.value.Length > 0)

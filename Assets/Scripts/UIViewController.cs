@@ -15,6 +15,7 @@ public class UIViewController : MonoBehaviour {
 	public ViewBabyRegistration2 viewBabyRegistration2;
 	public ViewDashboard viewDashboard;
 	public ViewTracker viewTracker;
+	public ViewAddFeeding viewAddFeeding;
 
 	public void ChangeView(UIView target)
 	{
@@ -45,8 +46,15 @@ public class UIViewController : MonoBehaviour {
 		ChangeView(viewDashboard);
 	}
 
+
 	public void ToViewTracker()
 	{
 		ChangeView(viewTracker);
 	}
+
+	public void ToViewAddFeeding()
+	{
+		ChangeView(viewAddFeeding);
+	}
+
 }

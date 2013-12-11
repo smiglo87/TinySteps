@@ -108,11 +108,6 @@ public class GUIManager : MonoBehaviour {
 	}
 
 
-
-
-
-	
-
 	
 	public void LabelWeightClearing()
 	{

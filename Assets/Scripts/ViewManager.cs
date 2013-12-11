@@ -13,7 +13,7 @@ public class ViewManager : MonoBehaviour {
 	public Transform journalAddEventView;
 	public Transform journalViewEventView;
 	
-	public Transform trackerView;
+
 	public Transform trackerFeedingListView;
 	public Transform trackerAddFeedingView;
 	public Transform trackerNappyListView;
@@ -58,13 +58,13 @@ public class ViewManager : MonoBehaviour {
 	}
 	
 	
-	public void ToTrackerView()
-	{
-		guiManager.MealListRefresh();
-		guiManager.NappyListRefresh();
-		guiManager.SleepingListRefresh();
-		ChangeView(trackerView);
-	}
+//	public void ToTrackerView()
+//	{
+//		guiManager.MealListRefresh();
+//		guiManager.NappyListRefresh();
+//		guiManager.SleepingListRefresh();
+//
+//	}
 	
 	public void ToTrackerAddFeedingView()
 	{

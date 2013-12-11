@@ -58,17 +58,21 @@ public class ViewBabyRegistration2 : UIView {
 											}
 											else popUpManager.ShowError("Error", "Please enter valid length");
 										}
+										else popUpManager.ShowError("Error", "Please enter valid length");
 									}
 									else if(userManager.userUnit == UserManager.Unit.metric) return true;
 								}
 								else popUpManager.ShowError("Errror", "Please eneter valid length");
 							}
+							else popUpManager.ShowError("Error", "Please enter valid length");
 						}
 						else popUpManager.ShowError("Error", "Please enter valid weight");
-					} 
+					}
+					else popUpManager.ShowError("Error", "Please enter valid weight");
 				}
 				else popUpManager.ShowError("Error", "Please enter valid weight");
 			}
+			else popUpManager.ShowError("Error", "Please enter valid weight");
 		}
 		else popUpManager.ShowError("Error", "Invalid data in baby form");
 
@@ -108,17 +112,25 @@ public class ViewBabyRegistration2 : UIView {
 		InputLabelsChange();
 	}
 
+
 	//updates inputs labels according to chosen userUnit 
 	public void InputLabelsChange()
 	{
 		if(userManager.userUnit == UserManager.Unit.metric)
 		{
+			birthWeightUnits.defaultText = "kg";
 			birthWeightUnits.label.text = "kg";
+			birthWeightDecimals.defaultText = "g";
 			birthWeightDecimals.label.text = "g";
+			birthLengthUnits.defaultText = "cm";
 			birthLengthUnits.label.text = "cm";
 		}
 		else
 		{
+			birthWeightUnits.defaultText = "lb";
+			birthWeightDecimals.defaultText = "oz";
+			birthLengthUnits.defaultText = "ft";
+			birthLengthDecimals.defaultText = "inch";
 			birthWeightUnits.label.text = "lb";
 			birthWeightDecimals.label.text = "oz";
 			birthLengthUnits.label.text = "ft";

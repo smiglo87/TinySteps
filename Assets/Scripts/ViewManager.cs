@@ -125,7 +125,7 @@ public class ViewManager : MonoBehaviour {
 	public void ToGrowthAddWeightView()
 	{
 		guiManager.UpdateTimeInputsWeight();
-		guiManager.LabelWeightUnitChange();
+		//guiManager.LabelWeightUnitChange();
 		guiManager.LabelWeightClearing();
 		ChangeView(growthAddWeightView);
 	}
@@ -141,7 +141,7 @@ public class ViewManager : MonoBehaviour {
 	{
 		guiManager.UpdateTimeInputsLength();
 		guiManager.LabelLengthClearing();
-		guiManager.LabelLengthUnitChange();
+		//guiManager.LabelLengthUnitChange();
 		ChangeView(growthAddLengthView);
 	}
 	

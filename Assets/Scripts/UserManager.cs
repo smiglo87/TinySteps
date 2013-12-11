@@ -12,6 +12,7 @@ public class UserManager : MonoBehaviour {
 	public static event OnBabyChangedHandler OnBabyChanged;
 	
 	public GUIManager guiManager;
+	public ViewWelcome viewWelcome;
 	public ViewManager viewManager;
 	public PhotoManager photoManager;
 	public UIViewController viewController;
@@ -19,7 +20,8 @@ public class UserManager : MonoBehaviour {
 	public BottleController bottleController;
 	public BreastfeedController breastfeedController;
 	public CupController cupController;
-	
+
+
 	public int currentBaby;
 	
 	public enum Unit { metric, imperial };
@@ -62,20 +64,20 @@ public class UserManager : MonoBehaviour {
 	//Sets user units chosen at welcome screen
 	public void SetInitialUnits()
 	{
-		if(guiManager.initialUnitList.value == "Metric")
+		if(viewWelcome.initialUnitList.value == "Metric")
 		{
 			PlayerPrefs.SetString("userUnits", "metric");
 			userUnit = Unit.metric;
 		}
-		else if (guiManager.initialUnitList.value == "Imperial")
+		else if (viewWelcome.initialUnitList.value == "Imperial")
 		{
 			PlayerPrefs.SetString("userUnits", "imperial");
 			userUnit = Unit.imperial;
 		}
-		else Debug.LogError("Initial user units unrecognised", guiManager.initialUnitList);
+		else Debug.LogError("Initial user units unrecognised", viewWelcome.initialUnitList);
 		
 
-		viewController.ToBabyRegistrationView();
+
 		
 	}
 	

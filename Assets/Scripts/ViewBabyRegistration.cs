@@ -78,7 +78,7 @@ public class ViewBabyRegistration : UIView {
 			viewBR2.birthWeightDecimals.label.text = "g";
 			viewBR2.birthLengthUnits.label.text = "cm";
 		}
-		else
+		else if(userManager.userUnit == UserManager.Unit.imperial)
 		{
 			viewBR2.birthWeightUnits.label.text = "lb";
 			viewBR2.birthWeightDecimals.label.text = "oz";

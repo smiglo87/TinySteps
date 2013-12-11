@@ -7,15 +7,7 @@ public class GUIManager : MonoBehaviour {
 	
 	public ViewManager viewManager;
 	public UserManager userManager;
-
-	//Welcome
-	public UIPopupList initialUnitList;
-
-	public UIInput babyRegisterBirthWeightUnits;
-	public UIInput babyRegisterBirthWeightDecimals;
 	
-	public UIInput babyRegisterBirthLengthUnits;
-	public UIInput babyRegisterBirthLengthDecimals;
 
 	//LoadTrackerLabels
 	public UILabel lastMealTime;
@@ -117,51 +109,10 @@ public class GUIManager : MonoBehaviour {
 
 
 
-	public void LengthUnitChanged()
-	{
-		if(userManager.userUnit == UserManager.Unit.metric)
-		{
-			babyRegisterBirthLengthDecimals.gameObject.SetActive(false);
-			lengthDecimals.gameObject.SetActive(false);
-		}
-		else babyRegisterBirthLengthDecimals.gameObject.SetActive(true);
-	}
+
 
 	
-	public void LabelLengthUnitChange()
-	{
-		if(userManager.userUnit == UserManager.Unit.metric)
-		{
-			babyRegisterBirthLengthUnits.label.text = "cm";
-			lengthUnits.label.text = "cm";
-		}
-		else
-		{
-			babyRegisterBirthLengthUnits.label.text = "ft";
-			babyRegisterBirthLengthDecimals.label.text = "inch";
-			lengthDecimals.label.text = "inch";
-			lengthUnits.label.text = "ft";
-		}
-	}
-	
-	
-	public void LabelWeightUnitChange()
-	{
-		if(userManager.userUnit == UserManager.Unit.metric)
-		{
-			babyRegisterBirthWeightUnits.label.text = "kg";
-			babyRegisterBirthWeightDecimals.label.text = "g";
-			weightUnits.label.text = "kg";
-			weightDecimals.label.text = "g";
-		}
-		else if(userManager.userUnit == UserManager.Unit.imperial)
-		{
-			babyRegisterBirthWeightUnits.label.text = "lb";
-			babyRegisterBirthWeightDecimals.label.text = "oz";
-			weightUnits.label.text = "lb";
-			weightDecimals.label.text = "oz";
-		}
-	}
+
 	
 	public void LabelWeightClearing()
 	{

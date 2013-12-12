@@ -21,6 +21,7 @@ public class BreastfeedController : MonoBehaviour {
 		else rightAmount = int.Parse(viewAddFeeding.rightBreast.CurrentLabelText);
 
 		bothBreastAmounts = leftAmount + rightAmount;
+
 	}
 
 

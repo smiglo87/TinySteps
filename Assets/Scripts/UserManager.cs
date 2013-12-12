@@ -175,6 +175,7 @@ public class UserManager : MonoBehaviour {
 					mealht.Add ("mealUnits", "min");
 					mealht.Add("leftAmount", meal.leftAmount);
 					mealht.Add("rightAmount", meal.rightAmount);
+					mealht.Add("bothAmounts", meal.amount);
 				}
 				else if(meal.mealType == Meal.MealType.breastMilk)
 				{
@@ -194,7 +195,7 @@ public class UserManager : MonoBehaviour {
 				{
 					mealht.Add("foodType", "solidFood");
 					mealht.Add("mealUnits", "g");	
-					mealht.Add("mealAmount", meal.cupAmount);
+					mealht.Add("mealAmount", meal.amount);
 				}
 				
 				listOfMeals.Add(mealht);	
@@ -388,6 +389,7 @@ public class UserManager : MonoBehaviour {
 					tempMeal.mealType = Meal.MealType.breastfeed;
 					tempMeal.leftAmount = (float)(double)mealHt["leftAmount"];
 					tempMeal.rightAmount = (float)(double)mealHt["rightAmount"];
+					tempMeal.amount = (float)(double)mealHt["bothAmounts"];
 				}
 				else if((string)mealHt["foodType"] == "breastMilk")
 				{
@@ -546,17 +548,21 @@ public class UserManager : MonoBehaviour {
 	
 	public void AddMeal(DateTime mTime, string mtype)
 	{
+
 		Meal meal = new Meal();
 		
 		meal.time = new DateTime(mTime.Year, mTime.Month, mTime.Day, mTime.Hour, mTime.Minute, mTime.Second);
 
 		if(mtype == "Breastfeed")
 		{
+			Debug.Log(mtype);
 			meal.mealType = Meal.MealType.breastfeed;
 			meal.unit = Meal.UnitType.min;
 			breastfeedController.AddBreastfeedAmount();
 			meal.leftAmount = breastfeedController.leftAmount;
 			meal.rightAmount = breastfeedController.rightAmount;
+			meal.amount = breastfeedController.bothBreastAmounts;
+			Debug.Log(meal.amount);
 		}
 		else if(mtype == "Breastmilk")
 		{
@@ -578,19 +584,21 @@ public class UserManager : MonoBehaviour {
 			}
 			else meal.unit = Meal.UnitType.oz;
 		}
-		else if (mtype == "Solids")
+		else if(mtype == "Solids")
 		{
+			Debug.Log(mtype);
 			meal.mealType = Meal.MealType.solidFood;
 			meal.unit = Meal.UnitType.g; 
 			meal.amount = cupController.currentAmount;
+
 		}
 		else Debug.LogError("Food type not recognised");
 		
 		babies[currentBaby].meals.Add(meal);
-		
+
 		SaveBabies();
 		guiManager.MealListRefresh();
-		viewManager.ToTrackerFeedingListView();
+		viewController.ToViewFeedingList();
 	}
 
 	

@@ -41,7 +41,6 @@ public class FeedingListCell : MonoBehaviour {
 					amount.text = bothBreasts / 60 + " h " + bothBreasts % 60 + " " + mealOnTheList.unit;
 				}
 				else amount.text = bothBreasts + " " + mealOnTheList.unit;
-
 			}
 			else amount.text = mealOnTheList.amount.ToString() + " " + mealOnTheList.unit;
 

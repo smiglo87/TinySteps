@@ -23,7 +23,6 @@ public class ViewAddFeeding : UIView {
 
 	public override void Show()
 	{
-		Debug.Log("ViewAddFeeding show called");
 		UpdateTimeInputs();
 		base.Show();
 	}

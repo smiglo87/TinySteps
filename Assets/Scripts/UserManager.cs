@@ -16,6 +16,7 @@ public class UserManager : MonoBehaviour {
 	public ViewManager viewManager;
 	public PhotoManager photoManager;
 	public ViewAddFeeding viewAddFeeding;
+	public ViewFeedingList viewFeedingList;
 	public UIViewController viewController;
 
 	public BottleController bottleController;
@@ -514,7 +515,7 @@ public class UserManager : MonoBehaviour {
 		//calls event - the baby has changed
 		if(OnBabyChanged != null) OnBabyChanged();
 
-		guiManager.MealListRefresh();
+		viewFeedingList.MealListRefresh();
 		guiManager.NappyListRefresh();
 		guiManager.SleepingListRefresh();
 		guiManager.WeightListRefresh();
@@ -597,7 +598,7 @@ public class UserManager : MonoBehaviour {
 		babies[currentBaby].meals.Add(meal);
 
 		SaveBabies();
-		guiManager.MealListRefresh();
+		viewFeedingList.MealListRefresh();
 		viewController.ToViewFeedingList();
 	}
 

@@ -4,8 +4,6 @@ using System;
 
 public class SleepingListCell : MonoBehaviour {
 
-	public GUIManager guiManager;
-
 
 	public UILabel startTime;
 	public UILabel sleepStatus;

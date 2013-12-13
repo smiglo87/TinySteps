@@ -3,8 +3,7 @@ using System.Collections;
 
 public class ViewManager : MonoBehaviour {
 	
-	public GUIManager guiManager;
-	
+
 	public Transform guiCamera;
 	public Transform currentView;
 
@@ -14,10 +13,7 @@ public class ViewManager : MonoBehaviour {
 	public Transform journalViewEventView;
 
 	public Transform moreView;
-	
 
-	
-	
 	public void ChangeView(Transform targetTransform)
 	{
 		guiCamera.localPosition = targetTransform.localPosition;

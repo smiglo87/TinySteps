@@ -13,8 +13,7 @@ public class UserManager : MonoBehaviour {
 
 	public UIViewController viewController;
 	public PhotoManager photoManager;
-
-	public GUIManager guiManager;
+	
 	public ViewManager viewManager;
 
 	public ViewWelcome viewWelcome;

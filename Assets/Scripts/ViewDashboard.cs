@@ -31,7 +31,6 @@ public class ViewDashboard : UIView {
 
 	public override void Show()
 	{
-		Debug.Log("ViewDashboard show called");
 		UpdateBaby();
 		base.Show();
 	}

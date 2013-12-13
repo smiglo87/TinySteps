@@ -8,6 +8,4 @@ public class Sleeping : MonoBehaviour {
 	public DateTime startTime = new DateTime(2000, 01, 01, 00, 00, 00);
 	public DateTime finishTime;
 
-	public enum SleepState { start, finish };
-	public SleepState sleepState;
 }

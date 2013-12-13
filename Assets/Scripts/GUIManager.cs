@@ -8,29 +8,6 @@ public class GUIManager : MonoBehaviour {
 	public ViewManager viewManager;
 	public UserManager userManager;
 
-	public UILabel lastSleepingTime;
-	public UILabel lastSleepingDuration;
-	public UILabel sleepingTimeSince;
-
-
-	//AddSleeping
-	public UIInput startMonth;
-	public UIInput startDay;
-	public UIInput startHour;
-	public UIInput startMin;
-
-	public UIToggle noFinishCheckmark;
-
-	public UILabel finishLabel;
-	public UIInput finishMonth;
-	public UIInput finishDay;
-	public UIInput finishHour;
-	public UIInput finishMin;
-
-	public UIList sleepList;
-
-
-
 	//GrowthLabelsRefresh
 	public UILabel lastWeightDate;
 	public UILabel lastWeight;
@@ -90,87 +67,6 @@ public class GUIManager : MonoBehaviour {
 		lengthDecimals.value = "";
 	}
 
-
-
-	public void SleepingNoFinishTimeCheckmarkChange()
-	{
-		if(noFinishCheckmark.value)
-		{
-			finishLabel.gameObject.SetActive(false);
-			finishDay.gameObject.SetActive(false);
-			finishMonth.gameObject.SetActive(false);
-			finishHour.gameObject.SetActive(false);
-			finishMin.gameObject.SetActive(false);
-		}
-		else
-		{
-			finishLabel.gameObject.SetActive(true);
-			finishDay.gameObject.SetActive(true);
-			finishMonth.gameObject.SetActive(true);
-			finishHour.gameObject.SetActive(true);
-			finishMin.gameObject.SetActive(true);
-		}
-	}
-
-
-	public void UpdateTimeInputsSleeping()
-	{
-		int dayNow = DateTime.Now.Day;
-		int monthNow = DateTime.Now.Month;
-		int hourNow = DateTime.Now.Hour;
-		int minNow = DateTime.Now.Minute;
-
-
-		if(dayNow < 10) 
-		{
-			startDay.value = "0" + dayNow.ToString();
-			finishDay.value = "0" + dayNow.ToString();
-		}
-		else
-		{
-			startDay.value = dayNow.ToString();
-			finishDay.value = dayNow.ToString();
-		}
-		 
-
-
-		if(monthNow < 10)
-		{
-			startMonth.value = "0" + monthNow.ToString();
-			finishMonth.value = "0" + monthNow.ToString();
-		}
-		else 
-		{
-			startMonth.value = monthNow.ToString();
-			finishMonth.value = monthNow.ToString();
-		}
-
-
-
-		if(hourNow < 10)
-		{
-			startHour.value = "0" + hourNow.ToString();
-			finishHour.value = "0" + hourNow.ToString();
-		}
-		else
-		{
-			startHour.value = hourNow.ToString();
-			finishHour.value = hourNow.ToString();
-		}
-
-
-
-		if(minNow < 10)
-		{
-			startMin.value = "0" + minNow.ToString();
-			finishMin.value = "0" + minNow.ToString();
-		}
-		else
-		{
-			startMin.value = minNow.ToString();
-			finishMin.value = minNow.ToString();
-		}
-	}
 	
 	public void UpdateTimeInputsWeight()
 	{
@@ -196,94 +92,6 @@ public class GUIManager : MonoBehaviour {
 		if(monthNow < 10) lengthMonth.value = "0" + monthNow.ToString();
 		else lengthMonth.value = monthNow.ToString();
 	}
-
-
-
-
-	public void SleepingListRefresh()
-	{
-		ArrayList sleepingList = new ArrayList(userManager.babies[userManager.currentBaby].sleeps);
-
-		List<Sleeping> recentSleeps = new List<Sleeping>();
-
-		//loop going through all position in sleeping list
-		foreach(Sleeping sleep in sleepingList)
-		{
-			//checking time difference between specific sleep and now
-			TimeSpan timeAgo = sleep.startTime - DateTime.Now;
-			if(timeAgo.Days <= 7) recentSleeps.Add(sleep);
-
-		}
-
-		List<Sleeping> sortedList = new List<Sleeping>();
-
-		if(recentSleeps.Count > 0) sortedList.Add(recentSleeps[0]);
-
-		//loop comparing each object with all in sorted list, starting loop from position 1 not 0 as we use first entry to compare to
-		for (int m = 1; m < recentSleeps.Count; m++)
-		{
-			//declaring this variable to store position on the list if found
-			int finalIndex = -1;
-			
-			//another loop going through sorted positions itself
-			for (int s=0; s<sortedList.Count; s++)
-			{
-				if (finalIndex == -1)
-				{
-					if (DateTime.Compare(recentSleeps[m].startTime, sortedList[s].startTime) < 0) //earlier
-					{
-						finalIndex = s;
-						//insert i meal to specific place
-						sortedList.Insert(finalIndex, recentSleeps[m]);
-
-					}
-				}
-			}
-			//inside later entry not found so adding in the end of sorted list
-			if (finalIndex == -1)
-			{
-				sortedList.Add(recentSleeps[m]);
-			}
-		}
-
-		//Insert dividers
-		ArrayList dividedList = new ArrayList();
-
-		if (sortedList.Count > 0) 
-		{
-			dividedList.Add(sortedList[0].startTime);
-			dividedList.Add(sortedList[0]);
-		}
-		
-		if (sortedList.Count > 1)
-		{
-			//loop comparing pairs of entries
-			for (int e=0; e<sortedList.Count; e++)
-			{
-				if (e < sortedList.Count-1)
-				{
-					//comparing
-					if (sortedList[e].startTime.Day != sortedList[e+1].startTime.Day)
-					{
-						dividedList.Add(sortedList[e]);
-						dividedList.Add(sortedList[e+1].startTime);
-					}
-					else
-					{
-						dividedList.Add(sortedList[e]);
-					}
-				}
-				//last one on the list
-				else
-				{
-					dividedList.Add(sortedList[e]);
-				}
-			}
-		}
-		sleepList.BuildList(dividedList);
-	}
-
-
 
 
 	public void WeightListRefresh()
@@ -398,8 +206,6 @@ public class GUIManager : MonoBehaviour {
 		weightsList.BuildList(dividedList);
 	}
 
-
-	
 
 	public void LengthListRefresh()
 	{

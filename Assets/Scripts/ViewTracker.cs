@@ -17,12 +17,17 @@ public class ViewTracker : UIView {
 	public UILabel lastNappyType;
 	public UILabel nappyTimeSince;
 
+	//Last Sleeping labels
+	public UILabel lastStartTime;
+	public UILabel lastDuration;
+	public UILabel lastFinishTime;
+
 
 	public override void Show()
 	{
 		base.Show();
 	}
-
+	
 
 	//updates last meal labels 
 	public void UpdateLastMealLabels(DateTime mealTime, float mealAmount, Meal.UnitType mealUnit)
@@ -49,5 +54,24 @@ public class ViewTracker : UIView {
 		
 		TimeSpan timeSince = DateTime.Now - nappyTime;
 		nappyTimeSince.text = "Time since: \n" + timeSince.Days.ToString() + " days " + timeSince.Hours.ToString() + " h " + timeSince.Minutes.ToString() + " min";
+	}
+
+	//updates last sleeping labels
+	public void UpdateLastSleepingLabels(DateTime startTime, DateTime finishedTime)
+	{
+		lastStartTime.text = "Start: " + startTime.ToString("dd.MM") + " at " + startTime.ToString("HH:mm");
+
+		if(finishedTime == DateTime.MinValue)
+		{
+			lastFinishTime.text = "Finish: still sleeping";
+			lastDuration.gameObject.SetActive(false);
+		}
+		else
+		{
+			lastFinishTime.text = "Finish: " + finishedTime.ToString("dd.MM") + " at " + finishedTime.ToString("HH:mm");
+			lastDuration.gameObject.SetActive(true);
+			TimeSpan duration = finishedTime - startTime;
+			lastDuration.text = "Duration: \n" + duration.Days.ToString() + " days " + duration.Hours.ToString() + " h " + duration.Minutes.ToString() + " min";
+		}
 	}
 }

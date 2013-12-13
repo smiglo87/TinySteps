@@ -27,6 +27,9 @@ public class UserManager : MonoBehaviour {
 	public ViewAddNappy viewAddNappy;
 	public ViewNappyList viewNappyList;
 
+	public ViewAddSleeping viewAddSleeping;
+	public ViewSleepingList viewSleepingList;
+
 
 	public int currentBaby;
 	
@@ -237,7 +240,7 @@ public class UserManager : MonoBehaviour {
 			{
 				Hashtable sleepHt = new Hashtable();
 
-				if(guiManager.noFinishCheckmark.value)
+				if(sleep.finishTime == DateTime.MinValue)
 				{
 					sleepHt.Add("startTime", sleep.startTime.ToString());
 					sleepHt.Add("finishTime", "notFinished");
@@ -521,7 +524,7 @@ public class UserManager : MonoBehaviour {
 
 		viewFeedingList.MealListRefresh();
 		viewNappyList.NappyListRefresh();
-		guiManager.SleepingListRefresh();
+		viewSleepingList.SleepingListRefresh();
 		guiManager.WeightListRefresh();
 		guiManager.LengthListRefresh();
 	}
@@ -626,25 +629,26 @@ public class UserManager : MonoBehaviour {
 	}
 	
 
-	public void AddSleeping()
+	public void AddSleeping(DateTime startTime, DateTime finishedTime)
 	{
 		Sleeping sleeping = new Sleeping();
 
-		if(guiManager.noFinishCheckmark.value)
+		if(viewAddSleeping.noFinishCheckmark.value)
 		{
-			sleeping.startTime = new DateTime(DateTime.Now.Year, int.Parse(guiManager.startMonth.value), int.Parse(guiManager.startDay.value), int.Parse(guiManager.startHour.value), int.Parse(guiManager.startMin.value), DateTime.Now.Second);
+			sleeping.startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour, startTime.Minute, startTime.Second);
+			sleeping.finishTime = DateTime.MinValue;
 		}
 		else
 		{
-			sleeping.startTime = new DateTime(DateTime.Now.Year, int.Parse(guiManager.startMonth.value), int.Parse(guiManager.startDay.value), int.Parse(guiManager.startHour.value), int.Parse(guiManager.startMin.value), DateTime.Now.Second);
-			sleeping.finishTime = new DateTime(DateTime.Now.Year, int.Parse(guiManager.finishMonth.value), int.Parse(guiManager.finishDay.value), int.Parse(guiManager.finishHour.value), int.Parse(guiManager.finishMin.value), DateTime.Now.Second);
+			sleeping.startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour, startTime.Minute, startTime.Second);
+			sleeping.finishTime = new DateTime(finishedTime.Year, finishedTime.Month, finishedTime.Day, finishedTime.Hour, finishedTime.Minute, finishedTime.Second);
 		}
 
 		babies[currentBaby].sleeps.Add(sleeping);
 
 		SaveBabies();
-		guiManager.SleepingListRefresh();
-		viewManager.ToTrackerSleepingListView();
+		viewSleepingList.SleepingListRefresh();
+		viewController.ToViewSleepingList();
 	}
 
 

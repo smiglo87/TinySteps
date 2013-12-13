@@ -10,18 +10,22 @@ public class UserManager : MonoBehaviour {
 	//constructs static event
 	public delegate void OnBabyChangedHandler();
 	public static event OnBabyChangedHandler OnBabyChanged;
-	
-	public GUIManager guiManager;
-	public ViewWelcome viewWelcome;
-	public ViewManager viewManager;
+
+	public UIViewController viewController;
 	public PhotoManager photoManager;
+
+	public GUIManager guiManager;
+	public ViewManager viewManager;
+
+	public ViewWelcome viewWelcome;
 	public ViewAddFeeding viewAddFeeding;
 	public ViewFeedingList viewFeedingList;
-	public UIViewController viewController;
-
 	public BottleController bottleController;
 	public BreastfeedController breastfeedController;
 	public CupController cupController;
+
+	public ViewAddNappy viewAddNappy;
+	public ViewNappyList viewNappyList;
 
 
 	public int currentBaby;
@@ -516,7 +520,7 @@ public class UserManager : MonoBehaviour {
 		if(OnBabyChanged != null) OnBabyChanged();
 
 		viewFeedingList.MealListRefresh();
-		guiManager.NappyListRefresh();
+		viewNappyList.NappyListRefresh();
 		guiManager.SleepingListRefresh();
 		guiManager.WeightListRefresh();
 		guiManager.LengthListRefresh();
@@ -603,22 +607,22 @@ public class UserManager : MonoBehaviour {
 	}
 
 	
-	public void AddNappy()
+	public void AddNappy(DateTime nTime, string nType)
 	{
 		Nappy nappy  =  new Nappy();
 
-		nappy.nappyTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, int.Parse(guiManager.nappyHour.value), int.Parse(guiManager.nappyMin.value), DateTime.Now.Second);
+		nappy.nappyTime = new DateTime(nTime.Year, nTime.Month, nTime.Day, nTime.Hour, nTime.Minute, nTime.Second);
 
-		if(guiManager.nappyType.value == "Wet") nappy.nappyType = Nappy.NappyType.Wet;
-		else if(guiManager.nappyType.value == "Stool") nappy.nappyType = Nappy.NappyType.Stool;
-		else if(guiManager.nappyType.value == "Both") nappy.nappyType = Nappy.NappyType.Both;
+		if(nType == "Wet") nappy.nappyType = Nappy.NappyType.Wet;
+		else if(nType == "Stool") nappy.nappyType = Nappy.NappyType.Stool;
+		else if(nType == "Both") nappy.nappyType = Nappy.NappyType.Both;
 		else Debug.LogError("Nappy type not recognised");
 
 		babies[currentBaby].nappies.Add(nappy);
 
 		SaveBabies();
-		guiManager.NappyListRefresh();
-		viewManager.ToTrackerNappyListView();
+		viewNappyList.NappyListRefresh();
+		viewController.ToViewNappyList();
 	}
 	
 

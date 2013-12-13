@@ -3,46 +3,46 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class ViewFeedingList : UIView {
+public class ViewNappyList : UIView {
 
 
 	public UserManager userManager;
 	public ViewTracker viewTracker;
 
-	public UIList mealsList;
+	public UIList nappiesList;
+
 
 	public override void Show()
 	{
-		MealListRefresh();
+		NappyListRefresh();
 		base.Show();
 	}
 
 
-	public void MealListRefresh()
+	public void NappyListRefresh()
 	{
-		List<Meal> mealList = userManager.babies[userManager.currentBaby].meals;
+		ArrayList nappyList = new ArrayList(userManager.babies[userManager.currentBaby].nappies);
 		
-		//grab last 7 days entries from all meals
-		List<Meal> recentMeals = new List<Meal>();
+		List<Nappy> recentNappies = new List<Nappy>();
 		
-		//loop going through all position in meal list
-		foreach (Meal meal in mealList)
+		//loop going through all position in nappy list
+		foreach (Nappy nappy in nappyList)
 		{
-			//checking time difference between specific meal and now
-			TimeSpan timeAgo = meal.time - DateTime.Now;
+			//checking time difference between specific nappy and now
+			TimeSpan timeAgo = nappy.nappyTime - DateTime.Now;
 			//catching recent meals
-			if (timeAgo.Days <= 7) recentMeals.Add(meal);
+			if (timeAgo.Days <= 7) recentNappies.Add(nappy);
 		}
-		//at this point we have recent 7 days of meals
-		//sorting meals by date
+		//at this point we have recent 7 days of nappy
+		//sorting nappies by date
 		
 		//declaring sorted list
-		List<Meal> sortedList = new List<Meal>();
+		List<Nappy> sortedList = new List<Nappy>();
 		//adding first entry to have someting to compare to
-		if (recentMeals.Count > 0)  sortedList.Add (recentMeals[0]);
+		if (recentNappies.Count > 0)  sortedList.Add (recentNappies[0]);
 		
 		//loop comparing each object with all in sorted list, starting loop from position 1 not 0 as we use first entry to compare to
-		for (int i=1; i<recentMeals.Count; i++)
+		for (int n=1; n<recentNappies.Count; n++)
 		{
 			//declaring this variable to store position on the list if found
 			int finalIndex = -1;
@@ -52,29 +52,28 @@ public class ViewFeedingList : UIView {
 			{
 				if (finalIndex == -1)
 				{
-					if (DateTime.Compare(recentMeals[i].time, sortedList[s].time) < 0) //earlier
+					if (DateTime.Compare(recentNappies[n].nappyTime, sortedList[s].nappyTime) < 0) //earlier
 					{
 						finalIndex = s;
 						//insert i meal to specific place
-						sortedList.Insert(finalIndex, recentMeals[i]);
+						sortedList.Insert(finalIndex, recentNappies[n]);
 					}
 				}
 			}
 			//inside later entry not found so adding in the end of sorted list
-			if (finalIndex == -1) 
+			if (finalIndex == -1)
 			{
-				sortedList.Add(recentMeals[i]);
-				//sends last meal info to tracker view
-				viewTracker.UpdateLastMealLabels(recentMeals[i].time, recentMeals[i].amount, recentMeals[i].unit); 
+				sortedList.Add(recentNappies[n]);
+				viewTracker.UpdateLastNappyLabels(recentNappies[n].nappyTime, recentNappies[n].nappyType);
 			}
 		}
-
+		
 		//Insert dividers
 		ArrayList dividedList = new ArrayList();
 		
 		if (sortedList.Count > 0) 
 		{
-			dividedList.Add(sortedList[0].time);
+			dividedList.Add(sortedList[0].nappyTime);
 			dividedList.Add(sortedList[0]);
 		}
 		
@@ -86,20 +85,20 @@ public class ViewFeedingList : UIView {
 				if (e < sortedList.Count-1)
 				{
 					//comparing
-					if (sortedList[e].time.Day != sortedList[e+1].time.Day)
+					if (sortedList[e].nappyTime.Day != sortedList[e+1].nappyTime.Day)
 					{
 						dividedList.Add(sortedList[e]);
-						dividedList.Add(sortedList[e+1].time);
+						dividedList.Add(sortedList[e+1].nappyTime);
 					}
 					else dividedList.Add(sortedList[e]);
 				}
 				//last one on the list
-				else dividedList.Add(sortedList[e]);
+				else
+				{
+					dividedList.Add(sortedList[e]);
+				}
 			}
 		}
-		mealsList.BuildList(dividedList);
+		nappiesList.BuildList(dividedList);
 	}
-
-
-
 }

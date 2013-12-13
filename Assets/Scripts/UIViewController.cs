@@ -19,6 +19,8 @@ public class UIViewController : MonoBehaviour {
 
 	public ViewFeedingList viewFeedingList;
 	public ViewAddFeeding viewAddFeeding;
+	public ViewNappyList viewNappyList;
+	public ViewAddNappy viewAddNappy;
 
 
 
@@ -70,4 +72,14 @@ public class UIViewController : MonoBehaviour {
 		ChangeView(viewAddFeeding);
 	}
 
+
+	public void ToViewNappyList()
+	{
+		ChangeView(viewNappyList);
+	}
+	
+	public void ToViewAddNappy()
+	{
+		ChangeView(viewAddNappy);
+	}
 }

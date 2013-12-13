@@ -14,9 +14,9 @@ public class ViewManager : MonoBehaviour {
 	public Transform journalViewEventView;
 	
 	
-	public Transform growthView;
-	public Transform growthWeightListView;
-	public Transform growthAddWeightView;
+//	public Transform growthView;
+//	public Transform growthWeightListView;
+//	public Transform growthAddWeightView;
 	public Transform growthLengthListView;
 	public Transform growthAddLengthView;
 	
@@ -54,25 +54,19 @@ public class ViewManager : MonoBehaviour {
 	
 	public void ToGrowthView()
 	{
-		ChangeView(growthView);
-		guiManager.WeightListRefresh();
+		//ChangeView(growthView);
 		guiManager.LengthListRefresh();
 	}
-	
-	public void ToGrowthWeightListView()
-	{
-		guiManager.WeightListRefresh();
-		ChangeView(growthWeightListView);
-	}
+
 	
 	
-	public void ToGrowthAddWeightView()
-	{
-		guiManager.UpdateTimeInputsWeight();
-		//guiManager.LabelWeightUnitChange();
-		guiManager.LabelWeightClearing();
-		ChangeView(growthAddWeightView);
-	}
+//	public void ToGrowthAddWeightView()
+//	{
+//
+//		//guiManager.LabelWeightUnitChange();
+//		//guiManager.LabelWeightClearing();
+//		ChangeView(growthAddWeightView);
+//	}
 	
 	public void ToGrowthLengthListView()
 	{

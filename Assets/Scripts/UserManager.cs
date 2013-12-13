@@ -30,6 +30,9 @@ public class UserManager : MonoBehaviour {
 	public ViewAddSleeping viewAddSleeping;
 	public ViewSleepingList viewSleepingList;
 
+	public ViewWeightList viewWeightList;
+	public ViewAddWeight viewAddWeight;
+
 
 	public int currentBaby;
 	
@@ -525,7 +528,7 @@ public class UserManager : MonoBehaviour {
 		viewFeedingList.MealListRefresh();
 		viewNappyList.NappyListRefresh();
 		viewSleepingList.SleepingListRefresh();
-		guiManager.WeightListRefresh();
+		viewWeightList.WeightListRefresh();
 		guiManager.LengthListRefresh();
 	}
 
@@ -652,32 +655,24 @@ public class UserManager : MonoBehaviour {
 	}
 
 
-	public void AddWeight()
+	public void AddWeight(DateTime wDate, int wUnits, int wDecimals)
 	{
 		Weight weight = new Weight();
 
-		weight.weightDate = new DateTime(DateTime.Now.Year, int.Parse(guiManager.weightMonth.value), int.Parse(guiManager.weightDay.value));
+		weight.weightDate = new DateTime(DateTime.Now.Year, wDate.Month, wDate.Day);
 
-		if(guiManager.weightUnits.value.Length > 0)
-		{
-			if(userUnit == Unit.metric)
-			{
-				weight.weightUnit = Weight.WeightUnit.metric;
-			}
-			else
-			{
-				weight.weightUnit = Weight.WeightUnit.imperial;
-			}
-			
-			weight.weightUnits = int.Parse(guiManager.weightUnits.value);
-			weight.weightDecimals = int.Parse (guiManager.weightDecimals.value);
-		}
+		if(userUnit == Unit.metric) weight.weightUnit = Weight.WeightUnit.metric;
+		else weight.weightUnit = Weight.WeightUnit.imperial;
+
+		weight.weightUnits = wUnits;
+		weight.weightDecimals = wDecimals;
+
 
 		babies[currentBaby].weights.Add(weight);
 
 		SaveBabies();
-		guiManager.WeightListRefresh();
-		viewManager.ToGrowthWeightListView();
+		viewWeightList.WeightListRefresh();
+		viewController.ToViewWeightList();
 	}
 
 

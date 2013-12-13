@@ -4,8 +4,6 @@ using System;
 
 public class ViewTracker : UIView {
 
-	public ViewFeedingList viewFeedingList;
-
 
 	//Last Feeding labels
 	public UILabel lastMealTime;

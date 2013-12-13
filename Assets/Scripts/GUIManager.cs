@@ -9,21 +9,10 @@ public class GUIManager : MonoBehaviour {
 	public UserManager userManager;
 
 	//GrowthLabelsRefresh
-	public UILabel lastWeightDate;
-	public UILabel lastWeight;
-	public UILabel weightTimeSince;
 
 	public UILabel lastLengthDate;
 	public UILabel lastLength;
 	public UILabel lengthTimeSince;
-
-	//AddWeight
-	public UIInput weightDay;
-	public UIInput weightMonth;
-	public UIInput weightUnits;
-	public UIInput weightDecimals;
-
-	public UIList weightsList;
 
 
 	//AddLength
@@ -36,15 +25,6 @@ public class GUIManager : MonoBehaviour {
 
 
 
-
-	public void FillWeight()
-	{
-		if(weightUnits.value == "kg" || weightUnits.value == "lb" || weightUnits.value == "") weightUnits.value = "0";
-
-		if(weightDecimals.value == "g" || weightDecimals.value == "oz" || weightDecimals.value == "") weightDecimals.value = "00";
-	}
-
-
 	public void FillLength()
 	{
 		if(lengthUnits.value == "cm" || lengthUnits.value == "ft" || lengthUnits.value == "") lengthUnits.value = "0";
@@ -53,33 +33,11 @@ public class GUIManager : MonoBehaviour {
 	}
 
 
-	
-	public void LabelWeightClearing()
-	{
-		weightUnits.value = "";
-		weightDecimals.value = "";
-	}
-
-
 	public void LabelLengthClearing()
 	{
 		lengthUnits.value = "";
 		lengthDecimals.value = "";
 	}
-
-	
-	public void UpdateTimeInputsWeight()
-	{
-		int dayNow = DateTime.Now.Day;
-		int monthNow = DateTime.Now.Month;
-
-		if(dayNow < 10) weightDay.value = "0" + dayNow.ToString();
-		else weightDay.value = dayNow.ToString();
-
-		if(monthNow < 10) weightMonth.value = "0" + monthNow.ToString();
-		else weightMonth.value = monthNow.ToString();
-	}
-
 
 	public void UpdateTimeInputsLength()
 	{
@@ -91,119 +49,6 @@ public class GUIManager : MonoBehaviour {
 		
 		if(monthNow < 10) lengthMonth.value = "0" + monthNow.ToString();
 		else lengthMonth.value = monthNow.ToString();
-	}
-
-
-	public void WeightListRefresh()
-	{
-		ArrayList weightList = new ArrayList(userManager.babies[userManager.currentBaby].weights);
-
-		List<Weight> recentWeights = new List<Weight>();
-
-		foreach(Weight weight in weightList)
-		{
-			TimeSpan timeAgo = weight.weightDate - DateTime.Now;
-
-			recentWeights.Add(weight);
-		}
-
-		List<Weight> sortedList = new List<Weight>();
-
-
-
-
-		if(recentWeights.Count > 0)
-		{
-			sortedList.Add(recentWeights[0]);
-		}
-
-		for (int w=1; w<recentWeights.Count; w++)
-		{
-			int finalIndex = -1;
-
-			for(int p=0; p<sortedList.Count; p++)
-			{
-				if (finalIndex == -1)
-				{
-					if (DateTime.Compare(recentWeights[w].weightDate, sortedList[p].weightDate) < 0) //earlier
-					{
-						finalIndex = p;
-						//insert i meal to specific place
-						sortedList.Insert(finalIndex, recentWeights[w]);
-					}
-				}
-			}
-			//inside later entry not found so adding in the end of sorted list
-			if (finalIndex == -1)
-			{
-				sortedList.Add(recentWeights[w]);
-
-
-			}
-
-
-		}
-		//Insert dividers
-		ArrayList dividedList = new ArrayList();
-
-		if(userManager.babies[userManager.currentBaby].bornWeightUnits != 0 && userManager.babies[userManager.currentBaby].bornWeightDecimals != 0)
-		{
-			Weight birthWeight = new Weight();
-			
-			birthWeight.weightDate = userManager.babies[userManager.currentBaby].dateOfBirth;
-			dividedList.Insert(0, birthWeight.weightDate);
-			
-		}
-
-		if (sortedList.Count > 0) 
-		{
-			dividedList.Add(sortedList[0].weightDate);
-			dividedList.Add(sortedList[0]);
-
-		}
-		
-		if (sortedList.Count > 1)
-		{
-			//loop comparing pairs of entries
-			for (int e=0; e<sortedList.Count; e++)
-			{
-				if (e < sortedList.Count-1)
-				{
-					//comparing
-					if (sortedList[e].weightDate.Month != sortedList[e+1].weightDate.Month)
-					{
-						dividedList.Add(sortedList[e]);
-						dividedList.Add(sortedList[e+1].weightDate);
-					}
-					else
-					{
-						dividedList.Add(sortedList[e]);
-					}
-				}
-				//last one on the list
-				else
-				{
-					dividedList.Add(sortedList[e]);
-				}
-			}
-		}
-
-		if(userManager.babies[userManager.currentBaby].bornWeightUnits != 0 && userManager.babies[userManager.currentBaby].bornWeightDecimals != 0)
-		{
-
-
-			Weight birthWeight = new Weight();
-
-			birthWeight.weightDate = userManager.babies[userManager.currentBaby].dateOfBirth;
-			birthWeight.weightUnits = userManager.babies[userManager.currentBaby].bornWeightUnits;
-			birthWeight.weightDecimals = userManager.babies[userManager.currentBaby].bornWeightDecimals;
-
-			dividedList.Insert(1, birthWeight);
-
-		}
-
-
-		weightsList.BuildList(dividedList);
 	}
 
 

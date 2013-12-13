@@ -24,6 +24,10 @@ public class UIViewController : MonoBehaviour {
 	public ViewSleepingList viewSleepingList;
 	public ViewAddSleeping viewAddSleeping;
 
+	public ViewGrowth viewGrowth;
+
+	public ViewWeightList viewWeightList;
+	public ViewAddWeight viewAddWeight;
 
 
 	public void ChangeView(UIView target)
@@ -95,5 +99,22 @@ public class UIViewController : MonoBehaviour {
 	public void ToViewAddSleeping()
 	{
 		ChangeView(viewAddSleeping);
+	}
+
+
+	
+	public void ToViewGrowth()
+	{
+		ChangeView(viewGrowth);
+	}
+
+	public void ToViewWeightList()
+	{
+		ChangeView(viewWeightList);
+	}
+	
+	public void ToViewAddWeight()
+	{
+		ChangeView(viewAddWeight);
 	}
 }

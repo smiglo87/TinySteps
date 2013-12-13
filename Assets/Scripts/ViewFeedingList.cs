@@ -17,7 +17,6 @@ public class ViewFeedingList : UIView {
 		base.Show();
 	}
 
-
 	public void MealListRefresh()
 	{
 		List<Meal> mealList = userManager.babies[userManager.currentBaby].meals;

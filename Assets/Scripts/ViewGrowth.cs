@@ -9,6 +9,11 @@ public class ViewGrowth : UIView {
 	public UILabel lastWeight;
 	public UILabel weightTimeSince;
 
+	//Last length labels
+	public UILabel lastLengthDate;
+	public UILabel lastLength;
+	public UILabel lengthTimeSince;
+
 
 	public override void Show()
 	{
@@ -25,6 +30,20 @@ public class ViewGrowth : UIView {
 		else lastWeight.text = "Weight: " + wUnits + " lb " + wDecimals + " oz";
 		
 		TimeSpan timeSince = DateTime.Now - weightTime;
-		weightTimeSince.text = "Time since: \n" + timeSince.Days.ToString() + " days ";
+		weightTimeSince.text = "Days since: \n" + timeSince.Days.ToString() + " days";
 	}
+
+	//updates last length labels
+	public void UpdateLastLengthLabels(DateTime lengthTime, float lUnits, float lDecimals, Length.LengthUnit lUnit)
+	{
+		lastLengthDate.text = "Last: " + lengthTime.ToString("dd.MM");
+		
+		if(lUnit == Length.LengthUnit.metric) lastLength.text = "Weight: " + lUnits + " cm";
+		else lastLength.text = "Weight: " + lUnits + " ft " + lDecimals + " inch";
+		
+		TimeSpan timeSince = DateTime.Now - lengthTime;
+		lengthTimeSince.text = "Days since: \n" + timeSince.Days.ToString() + " days";
+	}
+
+
 }

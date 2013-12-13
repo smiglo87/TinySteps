@@ -13,7 +13,6 @@ public class ViewAddWeight : UIView {
 	public UIInput weightDecimals;
 
 
-
 	public override void Show()
 	{
 		UpdateTimeInputs();

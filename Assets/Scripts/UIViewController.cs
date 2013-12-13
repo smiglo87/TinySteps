@@ -28,6 +28,8 @@ public class UIViewController : MonoBehaviour {
 
 	public ViewWeightList viewWeightList;
 	public ViewAddWeight viewAddWeight;
+	public ViewLengthList viewLengthList;
+	public ViewAddLength viewAddLength;
 
 
 	public void ChangeView(UIView target)
@@ -108,6 +110,7 @@ public class UIViewController : MonoBehaviour {
 		ChangeView(viewGrowth);
 	}
 
+
 	public void ToViewWeightList()
 	{
 		ChangeView(viewWeightList);
@@ -116,5 +119,16 @@ public class UIViewController : MonoBehaviour {
 	public void ToViewAddWeight()
 	{
 		ChangeView(viewAddWeight);
+	}
+
+
+	public void ToViewLengthList()
+	{
+		ChangeView(viewLengthList);
+	}
+	
+	public void ToViewAddLength()
+	{
+		ChangeView(viewAddLength);
 	}
 }

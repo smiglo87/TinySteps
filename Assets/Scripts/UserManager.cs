@@ -33,6 +33,8 @@ public class UserManager : MonoBehaviour {
 	public ViewWeightList viewWeightList;
 	public ViewAddWeight viewAddWeight;
 
+	public ViewLengthList viewLengthList;
+	public ViewAddLength viewAddLength;
 
 	public int currentBaby;
 	
@@ -529,7 +531,7 @@ public class UserManager : MonoBehaviour {
 		viewNappyList.NappyListRefresh();
 		viewSleepingList.SleepingListRefresh();
 		viewWeightList.WeightListRefresh();
-		guiManager.LengthListRefresh();
+		viewLengthList.LengthListRefresh();
 	}
 
 
@@ -677,33 +679,23 @@ public class UserManager : MonoBehaviour {
 
 
 	
-	public void AddLength()
+	public void AddLength(DateTime lDate, float lUnits, float lDecimals)
 	{
 		Length length = new Length();
 		
-		length.lengthDate = new DateTime(DateTime.Now.Year, int.Parse(guiManager.lengthMonth.value), int.Parse(guiManager.lengthDay.value));
+		length.lengthDate = new DateTime(DateTime.Now.Year, lDate.Month, lDate.Day);
 		
-		if(guiManager.lengthUnits.value.Length > 0)
-		{
-			if(userUnit == Unit.metric)
-			{
-				length.lengthUnit = Length.LengthUnit.metric;
-			}
-			else
-			{
-				length.lengthUnit = Length.LengthUnit.imperial;
-				length.lengthDecimals = float.Parse(guiManager.lengthDecimals.value);
-			}
-			
-			length.lengthUnits = float.Parse(guiManager.lengthUnits.value);
+		if(userUnit == Unit.metric) length.lengthUnit = Length.LengthUnit.metric;
+		else length.lengthUnit = Length.LengthUnit.imperial;
 
-		}
-		
+		length.lengthUnits = lUnits;
+		if(lDecimals > 0) length.lengthDecimals = lDecimals;
+
 		babies[currentBaby].lengths.Add(length);
 		
 		SaveBabies();
-		guiManager.LengthListRefresh();
-		viewManager.ToGrowthLengthListView();
+		viewLengthList.LengthListRefresh();
+		viewController.ToViewLengthList();
 	}
 
 }

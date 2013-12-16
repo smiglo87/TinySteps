@@ -31,6 +31,14 @@ public class UIViewController : MonoBehaviour {
 	public ViewLengthList viewLengthList;
 	public ViewAddLength viewAddLength;
 
+	public ViewJournalList viewJournalList;
+	public ViewAddJournalEvent viewAddJournalEvent;
+
+
+
+	public ViewMore viewMore;
+
+
 
 	public void ChangeView(UIView target)
 	{
@@ -62,7 +70,7 @@ public class UIViewController : MonoBehaviour {
 	}
 
 
-
+	#region Tracker Views
 	public void ToViewTracker()
 	{
 		ChangeView(viewTracker);
@@ -102,9 +110,9 @@ public class UIViewController : MonoBehaviour {
 	{
 		ChangeView(viewAddSleeping);
 	}
+	#endregion
 
-
-	
+	#region Growth Views
 	public void ToViewGrowth()
 	{
 		ChangeView(viewGrowth);
@@ -131,4 +139,26 @@ public class UIViewController : MonoBehaviour {
 	{
 		ChangeView(viewAddLength);
 	}
+	#endregion
+	
+	#region Journal Views
+	public void ToViewJournalList()
+	{
+		ChangeView(viewJournalList);
+	}
+
+	public void ToViewAddJournalEvent()
+	{
+		ChangeView(viewAddJournalEvent);
+	}
+	#endregion
+
+
+
+	public void ToViewMore()
+	{
+		ChangeView(viewMore);
+	}
+
+
 }

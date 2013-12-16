@@ -13,8 +13,6 @@ public class UserManager : MonoBehaviour {
 
 	public UIViewController viewController;
 	public PhotoManager photoManager;
-	
-	public ViewManager viewManager;
 
 	public ViewWelcome viewWelcome;
 	public ViewAddFeeding viewAddFeeding;

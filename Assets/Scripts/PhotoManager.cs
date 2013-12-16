@@ -13,7 +13,6 @@ public class PhotoManager : MonoBehaviour {
 	public void PromptForPhoto()
 	{
 		EtceteraBinding.promptForPhoto(0.25f, PhotoPromptType.CameraAndAlbum, 0.5f, true);
-		
 	}
 	
 	
@@ -54,12 +53,8 @@ public class PhotoManager : MonoBehaviour {
 				viewBabyRegistration.profilePicture.MarkAsChanged();
 				userManager.registerBabyProfilePicturePath = imagePath;
 			}
-			else
-			{
-				popUpManager.ShowError("Failed", "There was a problem with loading your picture. Please try again.");
-			}
+			else popUpManager.ShowError("Failed", "There was a problem with loading your picture. Please try again.");
 		}
-		
 	}
 	
 	public IEnumerator GetTexture(string imagePath, System.Action<Texture2D> result)
@@ -67,26 +62,12 @@ public class PhotoManager : MonoBehaviour {
 		WWW localFile = new WWW("file://" + imagePath);
         yield return localFile;
 		
-        if (localFile.error == null)
-		{
-			result(localFile.texture);
-			
-		}
-        else
-        {
-            Debug.Log("Open file error: "+localFile.error);
-        }
+		if (localFile.error == null) result(localFile.texture);
+		else Debug.Log("Open file error: " + localFile.error);
+        
 		yield return null;
 	}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 }

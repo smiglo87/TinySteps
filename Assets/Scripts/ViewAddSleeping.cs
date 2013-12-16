@@ -5,6 +5,7 @@ using System;
 public class ViewAddSleeping : UIView {
 
 	public UserManager userManager;
+	public UIViewController viewController;
 
 	public UIInput startMonth;
 	public UIInput startDay;
@@ -119,5 +120,16 @@ public class ViewAddSleeping : UIView {
 			startMin.value = minNow.ToString();
 			finishMin.value = minNow.ToString();
 		}
+	}
+
+
+	public void FinishSleep(DateTime startTime)
+	{
+
+		viewController.ToViewAddSleeping();
+		startMonth.value = startTime.Month.ToString();
+		startDay.value = startTime.Day.ToString();
+		startHour.value = startTime.Hour.ToString();
+		startMin.value = startTime.Minute.ToString();
 	}
 }

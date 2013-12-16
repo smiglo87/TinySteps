@@ -7,6 +7,7 @@ public class ViewSleepingList : UIView {
 
 	public UserManager userManager;
 	public ViewTracker viewTracker;
+	public ViewAddSleeping viewAddSleeping;
 
 	public UIList sleepList;
 
@@ -15,7 +16,6 @@ public class ViewSleepingList : UIView {
 		SleepingListRefresh();
 		base.Show();
 	}
-
 
 	public void SleepingListRefresh()
 	{

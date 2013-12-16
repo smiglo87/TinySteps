@@ -37,15 +37,13 @@ public class Baby : MonoBehaviour {
 	/// <returns>The age.</returns>
 	public string GetAge()
 	{
-
 		string formattedAge = "";
 			
 		DateTime todayDate = DateTime.Today;
 		int babyAgeInYears = todayDate.Year - dateOfBirth.Year;
 		int babyAgeInMonths = todayDate.Month - dateOfBirth.Month;
 		int babyAgeInDays = todayDate.Day - dateOfBirth.Day;
-		
-			
+
 			if(babyAgeInMonths < 0 && babyAgeInMonths > -12 && dateOfBirth.Day > todayDate.Day)
 			{
 				babyAgeInYears = babyAgeInYears - 1;
@@ -64,25 +62,18 @@ public class Baby : MonoBehaviour {
 				int numberOfMonths = babyAgeInMonths + 11;
 				formattedAge = babyAgeInYears + "," + numberOfMonths;
 			}
-			else 	
-			{
-				formattedAge = babyAgeInYears + "," + babyAgeInMonths;
-			}
-		
-	
-			
+			else formattedAge = babyAgeInYears + "," + babyAgeInMonths;
+
 		return formattedAge;
-		
 	}
-		
+
+
 	public static bool IsDateTime(string txtDate)
     {
        DateTime tempDate;
        return DateTime.TryParse(txtDate, out tempDate) ? true : false;
 	}
 	
-		
-	
-	
+
 
 }

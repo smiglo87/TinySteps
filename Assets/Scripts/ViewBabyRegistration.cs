@@ -19,7 +19,6 @@ public class ViewBabyRegistration : UIView {
 
 	public override void Show()
 	{
-		Debug.Log("ViewBabyRegistration show called");
 		if(nameInput.value.Length < 1) ClearRegistrationForm();
 		base.Show();
 	}

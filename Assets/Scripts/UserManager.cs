@@ -15,6 +15,7 @@ public class UserManager : MonoBehaviour {
 	public PhotoManager photoManager;
 
 	public ViewWelcome viewWelcome;
+	
 	public ViewAddFeeding viewAddFeeding;
 	public ViewFeedingList viewFeedingList;
 	public BottleController bottleController;
@@ -315,15 +316,12 @@ public class UserManager : MonoBehaviour {
 
 			//adding specific baby to arraylist
 			listOfBabies.Add(ht);
-			
-			
-			
+
 		}	
 		
 		string json = JSON.JsonEncode(listOfBabies);
 		Debug.Log(json);
-		
-		
+
 		//saves all babies info on device
 		PlayerPrefs.SetString("savedBabies", json);	
 		
@@ -558,7 +556,6 @@ public class UserManager : MonoBehaviour {
 	
 	public void AddMeal(DateTime mTime, string mtype)
 	{
-
 		Meal meal = new Meal();
 		
 		meal.time = new DateTime(mTime.Year, mTime.Month, mTime.Day, mTime.Hour, mTime.Minute, mTime.Second);
@@ -629,24 +626,39 @@ public class UserManager : MonoBehaviour {
 		viewNappyList.NappyListRefresh();
 		viewController.ToViewNappyList();
 	}
-	
+
+
 
 	public void AddSleeping(DateTime startTime, DateTime finishedTime)
 	{
-		Sleeping sleeping = new Sleeping();
-
-		if(viewAddSleeping.noFinishCheckmark.value)
+		//Debug.Log(GetSleepByStartTime(startTime).GetType());
+		//for open sleep
+		if(GetSleepByStartTime(startTime).startTime.Year != 2000)
 		{
-			sleeping.startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour, startTime.Minute, startTime.Second);
-			sleeping.finishTime = DateTime.MinValue;
+			Debug.Log("Closing existing sleep");
+			Sleeping openSleep = GetSleepByStartTime(startTime);
+			openSleep.finishTime = finishedTime;
 		}
+		//adding new closed sleep
 		else
 		{
-			sleeping.startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour, startTime.Minute, startTime.Second);
-			sleeping.finishTime = new DateTime(finishedTime.Year, finishedTime.Month, finishedTime.Day, finishedTime.Hour, finishedTime.Minute, finishedTime.Second);
+			Debug.Log("Creating new sleep");
+			Sleeping sleeping = new Sleeping();
+
+			if(viewAddSleeping.noFinishCheckmark.value)
+			{
+				sleeping.startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour, startTime.Minute, startTime.Second);
+				sleeping.finishTime = DateTime.MinValue;
+			}
+			else
+			{
+				sleeping.startTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour, startTime.Minute, startTime.Second);
+				sleeping.finishTime = new DateTime(finishedTime.Year, finishedTime.Month, finishedTime.Day, finishedTime.Hour, finishedTime.Minute, finishedTime.Second);
+			}
+
+			babies[currentBaby].sleeps.Add(sleeping);
 		}
 
-		babies[currentBaby].sleeps.Add(sleeping);
 
 		SaveBabies();
 		viewSleepingList.SleepingListRefresh();
@@ -654,6 +666,26 @@ public class UserManager : MonoBehaviour {
 	}
 
 
+
+	public Sleeping GetSleepByStartTime(DateTime start)
+	{
+
+		foreach(Sleeping sleep in babies[currentBaby].sleeps)
+		{
+			if(start.Month == sleep.startTime.Month &&
+			   start.Day == sleep.startTime.Day &&
+			   start.Hour == sleep.startTime.Hour &&
+			   start.Minute == sleep.startTime.Minute)
+			{
+				return sleep;
+			}
+		}
+		Sleeping dummySleep = new Sleeping();
+		return dummySleep;
+	}
+
+
+	
 	public void AddWeight(DateTime wDate, int wUnits, int wDecimals)
 	{
 		Weight weight = new Weight();

@@ -40,6 +40,7 @@ public class UserManager : MonoBehaviour {
 	public Unit userUnit;
 	
 	public string registerBabyProfilePicturePath = "";
+	public string journalEventPicturePath = "";
 	
 	//Main list storing all babies data
 	public List<Baby> babies = new List<Baby>();
@@ -180,7 +181,7 @@ public class UserManager : MonoBehaviour {
 				Hashtable eventHt = new Hashtable();
 				eventHt.Add("date", journal.eventDate.ToString());
 				eventHt.Add("picture", journal.eventPicture);
-				eventHt.Add("video", journal.eventVideo);
+
 				eventHt.Add("title", journal.eventTitle);
 				eventHt.Add("info", journal.eventDescription);
 
@@ -408,7 +409,6 @@ public class UserManager : MonoBehaviour {
 
 				tempJournal.eventDate = DateTime.Parse((string)journalHt["date"]);
 				tempJournal.eventPicture = (string)journalHt["picture"];
-				tempJournal.eventVideo = (string)journalHt["video"];
 				tempJournal.eventTitle = (string)journalHt["title"];
 				tempJournal.eventDescription = (string)journalHt["info"];
 
@@ -591,13 +591,12 @@ public class UserManager : MonoBehaviour {
 
 
 
-	public void AddJournalEvent(DateTime eTime, string ePicture, string eVideo, string eTitle, string eInfo)
+	public void AddJournalEvent(DateTime eTime, string ePicture, string eTitle, string eInfo)
 	{
 		Journal journal = new Journal();
 
 		journal.eventDate = new DateTime(eTime.Year, eTime.Month, eTime.Day);
 		journal.eventPicture = ePicture;
-		journal.eventVideo = eVideo;
 		journal.eventTitle = eTitle;
 		journal.eventDescription = eInfo;
 

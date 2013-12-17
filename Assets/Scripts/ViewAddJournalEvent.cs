@@ -12,8 +12,6 @@ public class ViewAddJournalEvent : UIView {
 	public UIInput year;
 
 	public UITexture picture;
-
-
 	public UIInput title;
 	public UIInput description;
 
@@ -28,7 +26,7 @@ public class ViewAddJournalEvent : UIView {
 	public void SubmitEvent()
 	{
 		DateTime eventDate = new DateTime(int.Parse(year.value), int.Parse(month.value), int.Parse(day.value));
-		//userManager.AddJournalEvent(eventDate, 
+		userManager.AddJournalEvent(eventDate, userManager.journalEventPicturePath, title.value, description.value);
 	}
 
 

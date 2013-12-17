@@ -8,6 +8,7 @@ public class PhotoManager : MonoBehaviour {
 	public PopUpManager popUpManager;
 	public UIViewController viewController;
 	public ViewBabyRegistration viewBabyRegistration;
+	public ViewAddJournalEvent viewAddJournalEvent;
 	
 	
 	public void PromptForPhoto()
@@ -52,6 +53,19 @@ public class PhotoManager : MonoBehaviour {
 				viewBabyRegistration.profilePicture.mainTexture = takenImage;
 				viewBabyRegistration.profilePicture.MarkAsChanged();
 				userManager.registerBabyProfilePicturePath = imagePath;
+			}
+			else popUpManager.ShowError("Failed", "There was a problem with loading your picture. Please try again.");
+		}
+		else if(viewController.currentView == viewController.viewAddJournalEvent)
+		{
+			Texture2D takenImage = new Texture2D(1,1);
+			yield return StartCoroutine(GetTexture(imagePath, value => takenImage = value));
+			
+			if(takenImage.width > 1)
+			{
+				viewAddJournalEvent.picture.mainTexture = takenImage;
+				viewAddJournalEvent.picture.MarkAsChanged();
+				userManager.journalEventPicturePath = imagePath;
 			}
 			else popUpManager.ShowError("Failed", "There was a problem with loading your picture. Please try again.");
 		}

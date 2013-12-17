@@ -171,7 +171,24 @@ public class UserManager : MonoBehaviour {
 			}
 			
 			ht.Add("profilePicture", baby.profilePicture);
-			
+
+			//Journal
+			ArrayList listOfEvents = new ArrayList();
+
+			foreach(Journal journal in baby.journals)
+			{
+				Hashtable eventHt = new Hashtable();
+				eventHt.Add("date", journal.eventDate.ToString());
+				eventHt.Add("picture", journal.eventPicture);
+				eventHt.Add("video", journal.eventVideo);
+				eventHt.Add("title", journal.eventTitle);
+				eventHt.Add("info", journal.eventDescription);
+
+				listOfEvents.Add(eventHt);
+			}
+			ht.Add("jounalList", listOfEvents);
+
+
 			//Meals
 			ArrayList listOfMeals = new ArrayList();
 			
@@ -381,6 +398,25 @@ public class UserManager : MonoBehaviour {
 
 
 
+			//loading journalList for specific baby
+			ArrayList listOfEvents = (ArrayList)babyHt["journalList"];
+
+			for(int e = 0; e < listOfEvents.Count; e++)
+			{
+				Hashtable journalHt = (Hashtable)listOfEvents[e];
+				Journal tempJournal = new Journal();
+
+				tempJournal.eventDate = DateTime.Parse((string)journalHt["date"]);
+				tempJournal.eventPicture = (string)journalHt["picture"];
+				tempJournal.eventVideo = (string)journalHt["video"];
+				tempJournal.eventTitle = (string)journalHt["title"];
+				tempJournal.eventDescription = (string)journalHt["info"];
+
+				tempBaby.journals.Add(tempJournal);
+			}
+
+
+
 			//loading mealList for specific baby
 			ArrayList listOfMeals = (ArrayList)babyHt["mealList"];
 			
@@ -527,6 +563,7 @@ public class UserManager : MonoBehaviour {
 		viewSleepingList.SleepingListRefresh();
 		viewWeightList.WeightListRefresh();
 		viewLengthList.LengthListRefresh();
+		//viewJounalList.JounalListRefresh();
 	}
 
 
@@ -551,9 +588,28 @@ public class UserManager : MonoBehaviour {
 		if(currentBaby > 0) ShowBaby(currentBaby-1);
 		else ShowBaby(babies.Count-1);
 	}
-	
 
-	
+
+
+	public void AddJournalEvent(DateTime eTime, string ePicture, string eVideo, string eTitle, string eInfo)
+	{
+		Journal journal = new Journal();
+
+		journal.eventDate = new DateTime(eTime.Year, eTime.Month, eTime.Day);
+		journal.eventPicture = ePicture;
+		journal.eventVideo = eVideo;
+		journal.eventTitle = eTitle;
+		journal.eventDescription = eInfo;
+
+		babies[currentBaby].journals.Add(journal);
+
+		SaveBabies();
+		//viewJournalList.JournalListRefresh();
+		viewController.ToViewJournalList();
+	}
+
+
+
 	public void AddMeal(DateTime mTime, string mtype)
 	{
 		Meal meal = new Meal();
@@ -726,5 +782,7 @@ public class UserManager : MonoBehaviour {
 		viewLengthList.LengthListRefresh();
 		viewController.ToViewLengthList();
 	}
+
+
 
 }

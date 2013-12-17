@@ -16,9 +16,5 @@ public class Meal : MonoBehaviour {
 
 	public float cupAmount = 0.0f;
 
-	
 
-	
-	
-	
 }

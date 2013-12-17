@@ -39,8 +39,9 @@ public class ViewNappyList : UIView {
 		//declaring sorted list
 		List<Nappy> sortedList = new List<Nappy>();
 		//adding first entry to have someting to compare to
-		if (recentNappies.Count > 0)  sortedList.Add (recentNappies[0]);
-		
+		if(recentNappies.Count > 0) sortedList.Add(recentNappies[0]);
+
+
 		//loop comparing each object with all in sorted list, starting loop from position 1 not 0 as we use first entry to compare to
 		for (int n=1; n<recentNappies.Count; n++)
 		{
@@ -63,11 +64,11 @@ public class ViewNappyList : UIView {
 			//inside later entry not found so adding in the end of sorted list
 			if (finalIndex == -1)
 			{
-				sortedList.Add(recentNappies[n]);
+				sortedList.Add(recentNappies[n]); 		
 				viewTracker.UpdateLastNappyLabels(recentNappies[n].nappyTime, recentNappies[n].nappyType);
 			}
 		}
-		
+
 		//Insert dividers
 		ArrayList dividedList = new ArrayList();
 		

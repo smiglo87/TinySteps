@@ -29,6 +29,7 @@ public class Baby : MonoBehaviour {
 	public List<Sleeping> sleeps = new List<Sleeping>();
 	public List<Weight> weights = new List<Weight>();
 	public List<Length> lengths = new List<Length>();
+	public List<Journal> journals = new List<Journal>();
 
 	
 	/// <summary>

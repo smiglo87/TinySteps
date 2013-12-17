@@ -11,12 +11,24 @@ public class ViewAddJournalEvent : UIView {
 	public UIInput month;
 	public UIInput year;
 
-	public UIInput addMilestone;
+	public UITexture picture;
+
+
+	public UIInput title;
+	public UIInput description;
+
+
 
 	public override void Show()
 	{
 		UpdateTimeInputs();
 		base.Show();
+	}
+
+	public void SubmitEvent()
+	{
+		DateTime eventDate = new DateTime(int.Parse(year.value), int.Parse(month.value), int.Parse(day.value));
+		//userManager.AddJournalEvent(eventDate, 
 	}
 
 

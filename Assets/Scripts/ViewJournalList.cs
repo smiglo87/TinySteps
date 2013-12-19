@@ -58,6 +58,6 @@ public class ViewJournalList : UIView {
 			}
 		}
 
-		//journalList.BuildList(sortedList);
+		eventList.BuildList(new ArrayList(sortedList));
 	}
 }

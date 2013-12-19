@@ -6,9 +6,13 @@ public class JournalListCell : MonoBehaviour {
 
 	public UserManager userManager;
 
-	public UILabel date;
-	public UILabel title;
-	public UITexture picture;
+	public UILabel eventDate;
+	public UILabel eventTitle;
+	public UITexture eventPicture;
+
+	public GameObject entryRoot;
+
+
 
 	public void Refresh(object obj)
 	{
@@ -16,9 +20,11 @@ public class JournalListCell : MonoBehaviour {
 		{
 			Journal eventOnTheList = (Journal)obj;
 
-			date.text = eventOnTheList.eventDate.ToString("dd.MM.yyyy");
+			entryRoot.SetActive(true);
+
+			eventDate.text = eventOnTheList.eventDate.ToString("dd.MM.yyyy");
 			
-			title.text = eventOnTheList.eventTitle.ToString();
+			eventTitle.text = eventOnTheList.eventTitle.ToString();
 
 			GameObject userM = GameObject.Find("UserManager");
 			userManager = userM.GetComponent<UserManager>();

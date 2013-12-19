@@ -34,6 +34,9 @@ public class UserManager : MonoBehaviour {
 	public ViewLengthList viewLengthList;
 	public ViewAddLength viewAddLength;
 
+	public ViewJournalList viewJournalList;
+	public ViewAddJournalEvent viewAddJournalEvent;
+
 	public int currentBaby;
 	
 	public enum Unit { metric, imperial };
@@ -179,15 +182,15 @@ public class UserManager : MonoBehaviour {
 			foreach(Journal journal in baby.journals)
 			{
 				Hashtable eventHt = new Hashtable();
-				eventHt.Add("date", journal.eventDate.ToString());
-				eventHt.Add("picture", journal.eventPicture);
+				eventHt.Add("eventDate", journal.eventDate.ToString());
+				//eventHt.Add("picture", journal.eventPicture);
 
-				eventHt.Add("title", journal.eventTitle);
-				eventHt.Add("info", journal.eventDescription);
+				eventHt.Add("eventTitle", journal.eventTitle);
+				eventHt.Add("eventInfo", journal.eventDescription);
 
 				listOfEvents.Add(eventHt);
 			}
-			ht.Add("jounalList", listOfEvents);
+			ht.Add("journalList", listOfEvents);
 
 
 			//Meals
@@ -402,15 +405,15 @@ public class UserManager : MonoBehaviour {
 			//loading journalList for specific baby
 			ArrayList listOfEvents = (ArrayList)babyHt["journalList"];
 
-			for(int e = 0; e < listOfEvents.Count; e++)
+			for(int z = 0; z < listOfEvents.Count; z++)
 			{
-				Hashtable journalHt = (Hashtable)listOfEvents[e];
+				Hashtable journalHt = (Hashtable)listOfEvents[z];
 				Journal tempJournal = new Journal();
 
-				tempJournal.eventDate = DateTime.Parse((string)journalHt["date"]);
-				tempJournal.eventPicture = (string)journalHt["picture"];
-				tempJournal.eventTitle = (string)journalHt["title"];
-				tempJournal.eventDescription = (string)journalHt["info"];
+				tempJournal.eventDate = DateTime.Parse((string)journalHt["eventDate"]);
+				//tempJournal.eventPicture = (string)journalHt["picture"];
+				tempJournal.eventTitle = (string)journalHt["eventTitle"];
+				tempJournal.eventDescription = (string)journalHt["eventInfo"];
 
 				tempBaby.journals.Add(tempJournal);
 			}
@@ -563,7 +566,7 @@ public class UserManager : MonoBehaviour {
 		viewSleepingList.SleepingListRefresh();
 		viewWeightList.WeightListRefresh();
 		viewLengthList.LengthListRefresh();
-		//viewJounalList.JounalListRefresh();
+		viewJournalList.JournalListRefresh();
 	}
 
 
@@ -591,19 +594,19 @@ public class UserManager : MonoBehaviour {
 
 
 
-	public void AddJournalEvent(DateTime eTime, string ePicture, string eTitle, string eInfo)
+	public void AddJournalEvent(DateTime eTime, string eTitle, string eInfo)
 	{
-		Journal journal = new Journal();
+		Journal addJournal = new Journal();
 
-		journal.eventDate = new DateTime(eTime.Year, eTime.Month, eTime.Day);
-		journal.eventPicture = ePicture;
-		journal.eventTitle = eTitle;
-		journal.eventDescription = eInfo;
+		addJournal.eventDate = new DateTime(eTime.Year, eTime.Month, eTime.Day);
+		//journal.eventPicture = ePicture;
+		addJournal.eventTitle = eTitle;
+		addJournal.eventDescription = eInfo;
 
-		babies[currentBaby].journals.Add(journal);
+		babies[currentBaby].journals.Add(addJournal);
 
 		SaveBabies();
-		//viewJournalList.JournalListRefresh();
+		viewJournalList.JournalListRefresh();
 		viewController.ToViewJournalList();
 	}
 
@@ -686,7 +689,7 @@ public class UserManager : MonoBehaviour {
 
 	public void AddSleeping(DateTime startTime, DateTime finishedTime)
 	{
-		//Debug.Log(GetSleepByStartTime(startTime).GetType());
+
 		//for open sleep
 		if(GetSleepByStartTime(startTime).startTime.Year != 2000)
 		{

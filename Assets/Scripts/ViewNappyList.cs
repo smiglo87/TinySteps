@@ -22,7 +22,8 @@ public class ViewNappyList : UIView {
 	public void NappyListRefresh()
 	{
 		ArrayList nappyList = new ArrayList(userManager.babies[userManager.currentBaby].nappies);
-		
+
+
 		List<Nappy> recentNappies = new List<Nappy>();
 		
 		//loop going through all position in nappy list
@@ -33,9 +34,11 @@ public class ViewNappyList : UIView {
 			//catching recent meals
 			if (timeAgo.Days <= 7) recentNappies.Add(nappy);
 		}
+
+
 		//at this point we have recent 7 days of nappy
+
 		//sorting nappies by date
-		
 		//declaring sorted list
 		List<Nappy> sortedList = new List<Nappy>();
 		//adding first entry to have someting to compare to
@@ -71,15 +74,13 @@ public class ViewNappyList : UIView {
 
 		//Insert dividers
 		ArrayList dividedList = new ArrayList();
-		
-		if (sortedList.Count > 0) 
+
+
+		if (sortedList.Count > 0)
 		{
+			//adding first divider
 			dividedList.Add(sortedList[0].nappyTime);
-			dividedList.Add(sortedList[0]);
-		}
-		
-		if (sortedList.Count > 1)
-		{
+
 			//loop comparing pairs of entries
 			for (int e=0; e<sortedList.Count; e++)
 			{
@@ -100,6 +101,8 @@ public class ViewNappyList : UIView {
 				}
 			}
 		}
+
+
 		nappiesList.BuildList(dividedList);
 	}
 }

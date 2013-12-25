@@ -66,14 +66,10 @@ public class ViewSleepingList : UIView {
 		//Insert dividers
 		ArrayList dividedList = new ArrayList();
 		
-		if (sortedList.Count > 0) 
+		if (sortedList.Count > 0)
 		{
 			dividedList.Add(sortedList[0].startTime);
-			dividedList.Add(sortedList[0]);
-		}
-		
-		if (sortedList.Count > 1)
-		{
+
 			//loop comparing pairs of entries
 			for (int e=0; e<sortedList.Count; e++)
 			{

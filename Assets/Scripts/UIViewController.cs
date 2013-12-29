@@ -33,6 +33,7 @@ public class UIViewController : MonoBehaviour {
 
 	public ViewJournalList viewJournalList;
 	public ViewAddJournalEvent viewAddJournalEvent;
+	public ViewGraph viewGraph;
 
 
 
@@ -160,5 +161,10 @@ public class UIViewController : MonoBehaviour {
 		ChangeView(viewMore);
 	}
 
+
+	public void ToViewGraph()
+	{
+		ChangeView(viewGraph);
+	}
 
 }

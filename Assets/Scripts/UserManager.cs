@@ -54,7 +54,7 @@ public class UserManager : MonoBehaviour {
 	{
 
 //#if UNITY_EDITOR
-		
+		//viewController.ToViewGraph();
 //#endif
 //#if !UNITY_EDITOR
 		
@@ -66,13 +66,14 @@ public class UserManager : MonoBehaviour {
 		if(babies.Count > 0)
 		{
 			ShowBaby(0);
-			viewController.ToDashboardMainView();
+			//viewController.ToDashboardMainView();
+			viewController.ToViewGraph();
 		}
 		else
 		{
 			viewController.ToWelcomeView();
 		}
-		
+//#endif
 	}
 	
 	

@@ -65,14 +65,13 @@ public class ViewWeightList : UIView {
 			dividedList.Insert(0, birthWeight.weightDate);	
 		}
 		
-		if (sortedList.Count > 0) 
+	
+		
+		if (sortedList.Count > 0)
 		{
 			dividedList.Add(sortedList[0].weightDate);
-			dividedList.Add(sortedList[0]);
-		}
-		
-		if (sortedList.Count > 1)
-		{
+
+
 			//loop comparing pairs of entries
 			for (int e=0; e<sortedList.Count; e++)
 			{

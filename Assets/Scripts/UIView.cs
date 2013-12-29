@@ -40,6 +40,7 @@ public class UIView : MonoBehaviour {
 
 		//check if UIPanel component exist on this view and update alpha
 		if (GetComponent<UIPanel>() != null) GetComponent<UIPanel>().alpha = alpha;
+		GetComponent<UIPanel>().SetDirty();
 
 		//find UIPanel components in children and update alpha on each if any
 		//UIPanel[] panels = (UIPanel[])GetComponentsInChildren(typeof(UIPanel));

@@ -694,12 +694,23 @@ public class UserManager : MonoBehaviour {
 		//for open sleep
 		if(GetSleepByStartTime(startTime).startTime.Year != 2000)
 		{
-			Debug.Log("Closing existing sleep");
-			Sleeping openSleep = GetSleepByStartTime(startTime);
-			openSleep.finishTime = finishedTime;
+			if(GetSleepByFinishTime(finishedTime).finishTime.Year != 2000)
+			{
+				Sleeping openSleep = GetSleepByFinishTime(finishedTime);
+				Debug.Log("Closing existing sleep");
+				openSleep.startTime = startTime;
+				openSleep.finishTime = finishedTime;
+			}
+			else
+			{
+				Sleeping openSleep = GetSleepByStartTime(startTime);
+				Debug.Log("Closing only start sleep");
+				openSleep.finishTime = finishedTime;
+			}
+
 		}
 		//adding new closed sleep
-		else
+		else 
 		{
 			Debug.Log("Creating new sleep");
 			Sleeping sleeping = new Sleeping();
@@ -743,26 +754,22 @@ public class UserManager : MonoBehaviour {
 		return dummySleep;
 	}
 
-//	public Sleeping GetExistingSleep(DateTime start, DateTime finish)
-//	{
-//		foreach(Sleeping sleep in babies[currentBaby].sleeps)
-//		{
-//			if(start.Month == sleep.startTime.Month &&
-//				start.Day == sleep.startTime.Day &&
-//				start.Hour == sleep.startTime.Hour &&
-//				start.Minute == sleep.startTime.Minute &&
-//				finish.Month == sleep.finishTime.Month &&
-//				finish.Day == sleep.finishTime.Day &&
-//				finish.Hour == sleep.finishTime.Hour &&
-//				finish.Minute == sleep.finishTime.Minute)
-//			{
-//				return sleep;
-//			}
-//		}
-//		Sleeping dummySleep = new Sleeping();
-//		return dummySleep;
-//
-//	}
+	public Sleeping GetSleepByFinishTime(DateTime finish)
+	{
+		foreach(Sleeping sleep in babies[currentBaby].sleeps)
+		{
+			if(finish.Month == sleep.finishTime.Month &&
+				finish.Day == sleep.finishTime.Day &&
+				finish.Hour == sleep.finishTime.Hour &&
+				finish.Minute == sleep.finishTime.Minute)
+			{
+				return sleep;
+			}
+		}
+		Sleeping dummySleep = new Sleeping();
+		return dummySleep;
+
+	}
 
 	
 	public void AddWeight(DateTime wDate, int wUnits, int wDecimals)

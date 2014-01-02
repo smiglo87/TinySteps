@@ -39,13 +39,11 @@ public class ViewBabyRegistration2 : UIView {
 						int weightDecimals;
 						if(int.TryParse(birthWeightDecimals.value, out weightDecimals) == true) 
 						{
-							Debug.Log("Weight correct");
 							if(birthLengthUnits.value.Length > 0)
 							{
 								float lengthUnits;
 								if(float.TryParse(birthLengthUnits.value, out lengthUnits) == true) 
 								{
-									Debug.Log("Length units correct");
 									if(userManager.userUnit == UserManager.Unit.imperial)
 									{
 										if(birthLengthDecimals.value.Length > 0)
@@ -53,7 +51,6 @@ public class ViewBabyRegistration2 : UIView {
 											float lengthDecimals;
 											if(float.TryParse(birthLengthDecimals.value, out lengthDecimals) == true) 
 											{
-												Debug.Log("Length decimals correct");
 												result = true;
 											}
 											else popUpManager.ShowError("Error", "Please enter valid length");

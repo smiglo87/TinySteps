@@ -743,6 +743,26 @@ public class UserManager : MonoBehaviour {
 		return dummySleep;
 	}
 
+//	public Sleeping GetExistingSleep(DateTime start, DateTime finish)
+//	{
+//		foreach(Sleeping sleep in babies[currentBaby].sleeps)
+//		{
+//			if(start.Month == sleep.startTime.Month &&
+//				start.Day == sleep.startTime.Day &&
+//				start.Hour == sleep.startTime.Hour &&
+//				start.Minute == sleep.startTime.Minute &&
+//				finish.Month == sleep.finishTime.Month &&
+//				finish.Day == sleep.finishTime.Day &&
+//				finish.Hour == sleep.finishTime.Hour &&
+//				finish.Minute == sleep.finishTime.Minute)
+//			{
+//				return sleep;
+//			}
+//		}
+//		Sleeping dummySleep = new Sleeping();
+//		return dummySleep;
+//
+//	}
 
 	
 	public void AddWeight(DateTime wDate, int wUnits, int wDecimals)

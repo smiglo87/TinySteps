@@ -128,7 +128,7 @@ public class ViewAddSleeping : UIView {
 		viewController.ToViewAddSleeping();
 		startMonth.value = startTime.ToString("MM");
 		startDay.value = startTime.ToString("dd");
-		startHour.value = startTime.ToString("hh");
+		startHour.value = startTime.ToString("HH");
 		startMin.value = startTime.ToString("mm");
 	}
 
@@ -138,15 +138,25 @@ public class ViewAddSleeping : UIView {
 		viewController.ToViewAddSleeping();
 		startMonth.value = sleep.startTime.ToString("MM");
 		startDay.value = sleep.startTime.ToString("dd");
-		startHour.value = sleep.startTime.ToString("hh");
+		startHour.value = sleep.startTime.ToString("HH");
 		startMin.value = sleep.startTime.ToString("mm");
+
+		noFinishCheckmark.value = false;
 
 		if(sleep.finishTime != DateTime.MinValue)
 		{
 			finishMonth.value = sleep.finishTime.ToString("MM");
 			finishDay.value = sleep.finishTime.ToString("dd");
-			finishHour.value = sleep.finishTime.ToString("hh");
+			finishHour.value = sleep.finishTime.ToString("HH");
 			finishMin.value = sleep.finishTime.ToString("mm");
 		}
+	}
+
+
+	public void DeleteSleep(Sleeping sleep)
+	{
+		Debug.Log("Deleting sleep");
+		viewController.ToViewSleepingList();
+		userManager.babies[userManager.currentBaby].sleeps.Remove(sleep);
 	}
 }

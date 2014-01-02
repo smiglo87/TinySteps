@@ -8,6 +8,7 @@ public class ViewAddLength : UIView {
 
 	public UIInput lengthDay;
 	public UIInput lengthMonth;
+	public UIInput lengthYear;
 	public UIInput lengthUnits;
 	public UIInput lengthDecimals;
 
@@ -22,7 +23,7 @@ public class ViewAddLength : UIView {
 	
 	public void SubmitLength()
 	{
-		DateTime lengthTime = new DateTime(DateTime.Now.Year, int.Parse(lengthMonth.value), int.Parse(lengthDay.value));
+		DateTime lengthTime = new DateTime(int.Parse(lengthYear.value), int.Parse(lengthMonth.value), int.Parse(lengthDay.value));
 
 		if(userManager.userUnit == UserManager.Unit.metric) lengthDecimals.value = "0";
 		userManager.AddLength(lengthTime, float.Parse(lengthUnits.value), float.Parse(lengthDecimals.value));
@@ -32,12 +33,15 @@ public class ViewAddLength : UIView {
 	{
 		int dayNow = DateTime.Now.Day;
 		int monthNow = DateTime.Now.Month;
+		int yearNow = DateTime.Now.Year;
 		
 		if(dayNow < 10) lengthDay.value = "0" + dayNow.ToString();
 		else lengthDay.value = dayNow.ToString();
 		
 		if(monthNow < 10) lengthMonth.value = "0" + monthNow.ToString();
 		else lengthMonth.value = monthNow.ToString();
+
+		lengthYear.value = yearNow.ToString();
 	}
 
 	public void FillLength()

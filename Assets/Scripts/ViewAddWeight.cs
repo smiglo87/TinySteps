@@ -9,6 +9,7 @@ public class ViewAddWeight : UIView {
 
 	public UIInput weightDay;
 	public UIInput weightMonth;
+	public UIInput weightYear;
 	public UIInput weightUnits;
 	public UIInput weightDecimals;
 
@@ -23,7 +24,7 @@ public class ViewAddWeight : UIView {
 
 	public void SubmitWeight()
 	{
-		DateTime weightTime = new DateTime(DateTime.Now.Year, int.Parse(weightMonth.value), int.Parse(weightDay.value));
+		DateTime weightTime = new DateTime(int.Parse(weightYear.value), int.Parse(weightMonth.value), int.Parse(weightDay.value));
 		
 		userManager.AddWeight(weightTime, int.Parse(weightUnits.value), int.Parse(weightDecimals.value));
 	}
@@ -33,12 +34,15 @@ public class ViewAddWeight : UIView {
 	{
 		int dayNow = DateTime.Now.Day;
 		int monthNow = DateTime.Now.Month;
+		int yearNow = DateTime.Now.Year;
 		
 		if(dayNow < 10) weightDay.value = "0" + dayNow.ToString();
 		else weightDay.value = dayNow.ToString();
 		
 		if(monthNow < 10) weightMonth.value = "0" + monthNow.ToString();
 		else weightMonth.value = monthNow.ToString();
+
+		weightYear.value = yearNow.ToString();
 	}
 
 

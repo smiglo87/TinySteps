@@ -13,6 +13,7 @@ public class SleepingListCell : MonoBehaviour {
 	public UIButton addFinishTime;
 
 	public DateTime start;
+	public Sleeping currentSleep;
 
 	public GameObject entryRoot;
 	public GameObject dividerRoot;
@@ -28,6 +29,7 @@ public class SleepingListCell : MonoBehaviour {
 			dividerRoot.SetActive(false);
 
 			start = sleepOnTheList.startTime;
+			currentSleep = sleepOnTheList;
 
 			startTime.text = sleepOnTheList.startTime.ToString("HH:mm");
 
@@ -57,9 +59,18 @@ public class SleepingListCell : MonoBehaviour {
 
 	public void AddFinish()
 	{
-		//Debug.Log(start);
 		GameObject addSleeping = GameObject.Find("9b.AddSleeping");
 		viewAddSleeping = addSleeping.GetComponent<ViewAddSleeping>();
 		viewAddSleeping.FinishSleep(start);
 	}
+
+
+	public void EditSleep()
+	{
+		Debug.Log("EditSleep called");
+		GameObject addSleeping = GameObject.Find("9b.AddSleeping");
+		viewAddSleeping = addSleeping.GetComponent<ViewAddSleeping>();
+		viewAddSleeping.EditCurrentSleep(currentSleep);
+	}
+
 }

@@ -5,6 +5,7 @@ using System;
 public class ViewAddLength : UIView {
 
 	public UserManager userManager;
+	public UIViewController viewController;
 
 	public UIInput lengthDay;
 	public UIInput lengthMonth;
@@ -74,5 +75,17 @@ public class ViewAddLength : UIView {
 			lengthUnits.label.text = "ft";
 			lengthDecimals.label.text = "inch";
 		}
+	}
+
+	public void EditCurrentLength(Length length)
+	{
+		viewController.ToViewAddLength();
+		lengthMonth.value = length.lengthDate.ToString("MM");
+		lengthDay.value = length.lengthDate.ToString("dd");
+		lengthYear.value = length.lengthDate.ToString("yyyy");
+		lengthUnits.value = length.lengthUnits.ToString();
+
+		if(userManager.userUnit == UserManager.Unit.imperial) lengthDecimals.value = length.lengthDecimals.ToString();
+
 	}
 }

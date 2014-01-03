@@ -690,7 +690,6 @@ public class UserManager : MonoBehaviour {
 
 	public void AddSleeping(DateTime startTime, DateTime finishedTime)
 	{
-
 		//for sleep with matching start
 		if(GetSleepByStartTime(startTime).startTime.Year != 2000)
 		{
@@ -732,8 +731,6 @@ public class UserManager : MonoBehaviour {
 		viewController.ToViewSleepingList();
 	}
 
-
-
 	public Sleeping GetSleepByStartTime(DateTime start)
 	{
 
@@ -772,7 +769,7 @@ public class UserManager : MonoBehaviour {
 	{
 		Weight weight = new Weight();
 
-		weight.weightDate = new DateTime(DateTime.Now.Year, wDate.Month, wDate.Day);
+		weight.weightDate = new DateTime(wDate.Year, wDate.Month, wDate.Day);
 
 		if(userUnit == Unit.metric) weight.weightUnit = Weight.WeightUnit.metric;
 		else weight.weightUnit = Weight.WeightUnit.imperial;
@@ -792,23 +789,61 @@ public class UserManager : MonoBehaviour {
 	
 	public void AddLength(DateTime lDate, float lUnits, float lDecimals)
 	{
-		Length length = new Length();
-		
-		length.lengthDate = new DateTime(DateTime.Now.Year, lDate.Month, lDate.Day);
-		
-		if(userUnit == Unit.metric) length.lengthUnit = Length.LengthUnit.metric;
-		else length.lengthUnit = Length.LengthUnit.imperial;
+		if(GetLengthByStartTime(lDate).lengthDate.Year != 2000)
+		{
+			Length existingLength = GetLengthByStartTime(lDate);
+			existingLength.lengthDate = lDate;
+			existingLength.lengthUnits = lUnits;
+			existingLength.lengthDecimals = lDecimals;
+		}
+		else if(GetLengthByUnits(lUnits) != 0)
+		{
+			//Length existingLength = GetLengthByUnits(lUnits);
 
-		length.lengthUnits = lUnits;
-		if(lDecimals > 0) length.lengthDecimals = lDecimals;
+		}
+		else
+		{
+			Length length = new Length();
+			
+			length.lengthDate = new DateTime(lDate.Year, lDate.Month, lDate.Day);
+			
+			if(userUnit == Unit.metric) length.lengthUnit = Length.LengthUnit.metric;
+			else length.lengthUnit = Length.LengthUnit.imperial;
 
-		babies[currentBaby].lengths.Add(length);
-		
+			length.lengthUnits = lUnits;
+			if(lDecimals > 0) length.lengthDecimals = lDecimals;
+
+			babies[currentBaby].lengths.Add(length);
+		}
 		SaveBabies();
 		viewLengthList.LengthListRefresh();
 		viewController.ToViewLengthList();
 	}
 
+	public Length GetLengthByStartTime(DateTime date)
+	{
+		foreach(Length length in babies[currentBaby].lengths)
+		{
+			if(date.Month == length.lengthDate.Month &&
+			   date.Day == length.lengthDate.Day &&
+			   date.Year == length.lengthDate.Year)
+			{
+				return length;
+			}
+		}
+		Length dummyLength = new Length();
+		return dummyLength;
+	}
+
+	public Length GetLengthByUnits(float unit)
+	{
+		foreach(Length length in babies[currentBaby].lengths)
+		{
+			if(unit > 0) return length;
+		}
+		Length dummyLength = new Length();
+		return dummyLength;
+	}
 
 
 }

@@ -17,6 +17,7 @@ public class ViewSleepingList : UIView {
 		base.Show();
 	}
 
+
 	public void SleepingListRefresh()
 	{
 		ArrayList sleepingList = new ArrayList(userManager.babies[userManager.currentBaby].sleeps);

@@ -4,6 +4,8 @@ using System;
 
 public class ViewGrowth : UIView {
 
+	public ViewLengthList viewLengthList;
+	public ViewWeightList viewWeightList;
 	//Last weight Labels
 	public UILabel lastWeightDate;
 	public UILabel lastWeight;
@@ -17,6 +19,8 @@ public class ViewGrowth : UIView {
 
 	public override void Show()
 	{
+		viewLengthList.LengthListRefresh();
+		viewWeightList.WeightListRefresh();
 		base.Show();
 	}
 

@@ -4,6 +4,7 @@ using System;
 
 public class LengthListCell : MonoBehaviour {
 
+	public ViewAddLength viewAddLength;
 
 	public UILabel date;
 	public UILabel length;
@@ -12,7 +13,7 @@ public class LengthListCell : MonoBehaviour {
 	public GameObject dividerRoot;
 	public UILabel monthLabel;
 	
-	
+	public Length currentLength;
 	
 	public void Refresh(object obj)
 	{
@@ -20,7 +21,9 @@ public class LengthListCell : MonoBehaviour {
 		if (obj.GetType() == typeof(Length))
 		{
 			Length lengthOnTheList = (Length)obj;
-			
+
+			currentLength = lengthOnTheList;
+
 			entryRoot.SetActive(true);
 			dividerRoot.SetActive(false);
 			
@@ -35,10 +38,15 @@ public class LengthListCell : MonoBehaviour {
 			dividerRoot.SetActive(true);
 			
 			DateTime month = (DateTime)obj;
-			monthLabel.text = month.Date.ToString("MMMM") + ", " + month.Year.ToString();
+			monthLabel.text = month.Date.ToString("MMMM") + ", " + month.Date.ToString("yyyy");
 		}
 	}
 
-
+	public void EditLength()
+	{
+		GameObject addLength = GameObject.Find("10d.AddLength");
+		viewAddLength = addLength.GetComponent<ViewAddLength>();
+		viewAddLength.EditCurrentLength(currentLength);
+	}
 
 }

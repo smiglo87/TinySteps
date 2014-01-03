@@ -151,12 +151,5 @@ public class ViewAddSleeping : UIView {
 			finishMin.value = sleep.finishTime.ToString("mm");
 		}
 	}
-
-
-	public void DeleteSleep(Sleeping sleep)
-	{
-		Debug.Log("Deleting sleep");
-		viewController.ToViewSleepingList();
-		userManager.babies[userManager.currentBaby].sleeps.Remove(sleep);
-	}
+	
 }

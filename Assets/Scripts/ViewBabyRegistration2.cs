@@ -17,7 +17,6 @@ public class ViewBabyRegistration2 : UIView {
 
 	public override void Show()
 	{
-		Debug.Log("ViewBabyRegistration2 show called");
 		UpdateLengthInput();
 		base.Show();
 	}

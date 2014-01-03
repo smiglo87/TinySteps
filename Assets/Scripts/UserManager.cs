@@ -691,23 +691,20 @@ public class UserManager : MonoBehaviour {
 	public void AddSleeping(DateTime startTime, DateTime finishedTime)
 	{
 
-		//for open sleep
+		//for sleep with matching start
 		if(GetSleepByStartTime(startTime).startTime.Year != 2000)
 		{
-			if(GetSleepByFinishTime(finishedTime).finishTime.Year != 2000)
-			{
-				Sleeping openSleep = GetSleepByFinishTime(finishedTime);
-				Debug.Log("Closing existing sleep");
-				openSleep.startTime = startTime;
-				openSleep.finishTime = finishedTime;
-			}
-			else
-			{
-				Sleeping openSleep = GetSleepByStartTime(startTime);
-				Debug.Log("Closing only start sleep");
-				openSleep.finishTime = finishedTime;
-			}
-
+			Sleeping openSleep = GetSleepByStartTime(startTime);
+			Debug.Log("Closing only start sleep");
+			openSleep.finishTime = finishedTime;
+		}
+		//for sleep with matching finish
+		else if(GetSleepByFinishTime(finishedTime).finishTime.Year != 2000)
+		{
+			Debug.Log("Closing existing sleep");
+			Sleeping openSleep = GetSleepByFinishTime(finishedTime);
+			openSleep.startTime = startTime;
+			openSleep.finishTime = finishedTime;
 		}
 		//adding new closed sleep
 		else 
@@ -768,7 +765,6 @@ public class UserManager : MonoBehaviour {
 		}
 		Sleeping dummySleep = new Sleeping();
 		return dummySleep;
-
 	}
 
 	

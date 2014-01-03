@@ -67,7 +67,6 @@ public class SleepingListCell : MonoBehaviour {
 
 	public void EditSleep()
 	{
-		Debug.Log("EditSleep called");
 		GameObject addSleeping = GameObject.Find("9b.AddSleeping");
 		viewAddSleeping = addSleeping.GetComponent<ViewAddSleeping>();
 		viewAddSleeping.EditCurrentSleep(currentSleep);
